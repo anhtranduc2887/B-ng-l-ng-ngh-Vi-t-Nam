@@ -289,7 +289,7 @@ function checkout() {
   updateCartCount();
   toggleCartModal();
 }
-
+ 
 function handleContactSubmit(e) {
   e.preventDefault();
   alert("Tin nhắn của bạn đã được gửi thành công. Cảm ơn bạn đã liên hệ!");
