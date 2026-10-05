@@ -1,754 +1,261 @@
-<header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-stone-900/90 backdrop-blur-md text-white border-b border-stone-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        <a href="#" class="flex items-center gap-3 group">
-            <div class="w-10 h-10 rounded-full bg-amber-600 flex items-center justify-center text-white font-serif font-bold text-xl shadow-lg group-hover:bg-amber-500 transition-colors">
-                VN
-            </div>
-            <div>
-                <span class="font-serif text-xl sm:text-2xl font-bold tracking-wide text-amber-400 block">Làng Nghề Việt</span>
-                <span class="text-xs text-stone-400 tracking-widest uppercase">Di Sản Ngàn Năm</span>
-            </div>
-        </a>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bản Đồ Làng Nghề Truyền Thống Việt Nam</title>
+  
+  <!-- Google Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
 
-        <!-- Desktop Nav -->
-        <nav class="hidden md:flex items-center gap-8 font-medium text-sm">
-            <a href="#trang-chu" class="hover:text-amber-400 transition-colors">Trang Chủ</a>
-            <a href="#gioi-thieu" class="hover:text-amber-400 transition-colors">Tổng Quan</a>
-            <a href="#lang-nghe" class="hover:text-amber-400 transition-colors">Làng Nghề Nổi Bật</a>
-            <a href="#ban-do" class="hover:text-amber-400 transition-colors">Bản Đồ Di Sản</a>
-            <a href="#cua-hang" class="hover:text-amber-400 transition-colors">Sản Phẩm Thủ Công</a>
-            <a href="#lien-he" class="hover:text-amber-400 transition-colors">Liên Hệ</a>
-        </nav>
+  <!-- Leaflet CSS for Map -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-        <div class="hidden lg:flex items-center gap-4">
-            <a href="#cua-hang" class="bg-amber-600 hover:bg-amber-700 text-white px-5 py-2.5 rounded-full font-medium text-sm transition shadow-md hover:shadow-amber-600/30 flex items-center gap-2">
-                <i class="fa-solid fa-basket-shopping"></i> Mua Sản Phẩm
-            </a>
-        </div>
+  <!-- Link CSS riêng -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-        <!-- Mobile Menu Button -->
-        <button id="mobile-menu-btn" class="md:hidden text-2xl text-stone-200 hover:text-amber-400 focus:outline-none">
-            <i class="fa-solid fa-bars"></i>
+  <!-- HEADER / NAVIGATION -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="logo-area" onclick="switchTab('home')">
+        <i data-lucide="compass" class="logo-icon"></i>
+        <span class="logo-text">LàngNghề<span>VN</span></span>
+      </div>
+      
+      <nav class="nav-menu">
+        <button class="nav-link active" data-tab="home" onclick="switchTab('home')">
+          <i data-lucide="home"></i> Trang chủ
         </button>
-    </div>
-
-    <!-- Mobile Menu Dropdown -->
-    <div id="mobile-menu" class="hidden md:hidden bg-stone-900 border-t border-stone-800 px-6 py-6 space-y-4">
-        <a href="#trang-chu" class="block hover:text-amber-400 font-medium">Trang Chủ</a>
-        <a href="#gioi-thieu" class="block hover:text-amber-400 font-medium">Tổng Quan</a>
-        <a href="#lang-nghe" class="block hover:text-amber-400 font-medium">Làng Nghề Nổi Bật</a>
-        <a href="#ban-do" class="block hover:text-amber-400 font-medium">Bản Đồ Di Sản</a>
-        <a href="#cua-hang" class="block hover:text-amber-400 font-medium">Sản Phẩm Thủ Công</a>
-        <a href="#lien-he" class="block hover:text-amber-400 font-medium">Liên Hệ</a>
-    </div>
-</header>
-
-<section id="trang-chu" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-stone-950 text-white">
-    <!-- Background Overlay Image -->
-    <div class="absolute inset-0 z-0 opacity-40 mix-blend-overlay">
-        <img src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=1920&q=80" alt="Làng nghề truyền thống" class="w-full h-full object-cover scale-105 animate-pulse duration-[10000ms]">
-    </div>
-    <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/60 to-transparent z-10"></div>
-
-    <div class="relative z-20 max-w-5xl mx-auto px-4 text-center py-20">
-        <span class="inline-block py-1 px-4 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-400 text-xs sm:text-sm font-semibold tracking-widest uppercase mb-6 backdrop-blur-sm">
-            ✨ Tôn Vinh Giá Trị Văn Hóa Việt Nam
-        </span>
-        <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-tight">
-            Hồn Đất, Sắc Màu & <br/><span class="text-amber-400 italic">Tinh Hoa Làng Nghề</span>
-        </h1>
-        <p class="max-w-2xl mx-auto text-stone-300 text-base sm:text-lg mb-10 leading-relaxed font-light">
-            Khám phá hành trình lưu giữ ngọn lửa truyền thống qua đôi bàn tay khéo léo của các nghệ nhân dọc khắp ba miền đất nước. Nơi mỗi sản phẩm là một câu chuyện lịch sử hào hùng.
-        </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a href="#lang-nghe" class="w-full sm:w-auto bg-amber-600 hover:bg-amber-700 text-white px-8 py-4 rounded-xl font-semibold transition shadow-xl hover:shadow-amber-600/40 flex items-center justify-center gap-3">
-                <span>Khám Phá Ngay</span>
-                <i class="fa-solid fa-arrow-right-long"></i>
-            </a>
-            <a href="#ban-do" class="w-full sm:w-auto bg-stone-800/80 hover:bg-stone-800 text-stone-200 border border-stone-700 px-8 py-4 rounded-xl font-semibold backdrop-blur-md transition flex items-center justify-center gap-3">
-                <i class="fa-solid fa-map-location-dot text-amber-400"></i> Xem Bản Đồ Làng Nghề
-            </a>
-        </div>
-
-        <!-- Stats Bar -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 pt-10 border-t border-stone-800/80 text-left">
-            <div class="p-4 bg-stone-900/40 backdrop-blur-sm rounded-xl border border-stone-800">
-                <div class="font-serif text-3xl sm:text-4xl font-bold text-amber-400 mb-1">500+</div>
-                <div class="text-xs sm:text-sm text-stone-400">Làng nghề truyền thống lâu đời</div>
-            </div>
-            <div class="p-4 bg-stone-900/40 backdrop-blur-sm rounded-xl border border-stone-800">
-                <div class="font-serif text-3xl sm:text-4xl font-bold text-amber-400 mb-1">63</div>
-                <div class="text-xs sm:text-sm text-stone-400">Tỉnh thành gìn giữ di sản</div>
-            </div>
-            <div class="p-4 bg-stone-900/40 backdrop-blur-sm rounded-xl border border-stone-800">
-                <div class="font-serif text-3xl sm:text-4xl font-bold text-amber-400 mb-1">1.000+</div>
-                <div class="text-xs sm:text-sm text-stone-400">Nghệ nhân ưu tú & cao niên</div>
-            </div>
-            <div class="p-4 bg-stone-900/40 backdrop-blur-sm rounded-xl border border-stone-800">
-                <div class="font-serif text-3xl sm:text-4xl font-bold text-amber-400 mb-1">100%</div>
-                <div class="text-xs sm:text-sm text-stone-400">Sản phẩm thủ công tự nhiên</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="gioi-thieu" class="py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div class="lg:col-span-6 relative">
-                <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-4 border-amber-50">
-                    <img src="https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?auto=format&fit=crop&w=800&q=80" alt="Nghệ nhân gốm" class="w-full h-[450px] object-cover hover:scale-105 transition duration-700">
-                </div>
-                <div class="absolute -bottom-6 -right-6 w-72 h-72 bg-amber-100 rounded-2xl -z-0 hidden sm:block"></div>
-                <div class="absolute -top-6 -left-6 bg-stone-900 text-white p-6 rounded-2xl shadow-xl z-20 max-w-xs">
-                    <div class="flex items-center gap-3 mb-2">
-                        <i class="fa-solid fa-quote-left text-amber-400 text-2xl"></i>
-                        <span class="font-serif font-bold text-amber-400">Di Sản Sống</span>
-                    </div>
-                    <p class="text-xs text-stone-300">"Mỗi làng nghề là một bảo tàng sống về lịch sử, văn hóa và bản sắc tâm hồn Việt qua nhiều thế hệ."</p>
-                </div>
-            </div>
-
-            <div class="lg:col-span-6 space-y-6">
-                <span class="text-amber-600 font-semibold tracking-wider uppercase text-sm flex items-center gap-2">
-                    <i class="fa-solid fa-feather"></i> GIỚI THIỆU TỔNG QUAN
-                </span>
-                <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-stone-900 leading-tight">
-                    Lưu Giữ Hồn Quê Qua Từng Nét Chạm Truyền Thống
-                </h2>
-                <p class="text-stone-600 leading-relaxed">
-                    Làng nghề thủ công truyền thống ở Việt Nam không chỉ là nơi sản xuất ra các mặt hàng tiêu dùng hay mỹ nghệ mà còn là không gian lưu giữ tinh hoa văn hóa dân tộc. Trải qua thăng trầm lịch sử, hàng trăm làng nghề từ Bắc chí Nam vẫn đang miệt mài gìn giữ lửa nghề, truyền đời qua nhiều thế hệ nghệ nhân tâm huyết.
-                </p>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-                    <div class="flex items-start gap-4 p-4 rounded-xl bg-amber-50/50 border border-amber-100">
-                        <div class="w-10 h-10 rounded-lg bg-amber-600 text-white flex items-center justify-center shrink-0">
-                            <i class="fa-solid fa-hands-holding"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-stone-900 mb-1">Thủ Công Tinh Xảo</h3>
-                            <p class="text-xs text-stone-600">100% làm bằng tay với kỹ thuật điêu luyện lâu đời.</p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-start gap-4 p-4 rounded-xl bg-amber-50/50 border border-amber-100">
-                        <div class="w-10 h-10 rounded-lg bg-amber-600 text-white flex items-center justify-center shrink-0">
-                            <i class="fa-solid fa-earth-asia"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-stone-900 mb-1">Vươn Tầm Thế Giới</h3>
-                            <p class="text-xs text-stone-600">Sản phẩm thủ công xuất khẩu đến hơn 50 quốc gia.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="pt-4">
-                    <a href="#lang-nghe" class="inline-flex items-center gap-2 text-amber-600 font-bold hover:text-amber-700 transition">
-                        <span>Khám phá danh sách các làng nghề</span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="lang-nghe" class="py-24 bg-stone-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="text-amber-600 font-semibold tracking-wider uppercase text-sm block mb-3">
-                <i class="fa-solid fa-star text-amber-500"></i> NHỮNG ĐIỂM ĐẾN TIÊU BIỂU
-            </span>
-            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-stone-900 mb-4">
-                Làng Nghề Nổi Bật Việt Nam
-            </h2>
-            <p class="text-stone-600">
-                Bấm vào từng làng nghề để khám phá lịch sử hình thành, nghệ nhân tiêu biểu và các sản phẩm độc đáo đặc trưng.
-            </p>
-        </div>
-
-        <!-- Villages Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Card 1: Bát Tràng -->
-            <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-stone-200 hover:shadow-2xl transition duration-300 flex flex-col group">
-                <div class="relative h-64 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=600&q=80" alt="Làng gốm Bát Tràng" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                    <span class="absolute top-4 left-4 bg-stone-900/80 backdrop-blur-md text-amber-400 text-xs font-semibold px-3 py-1.5 rounded-full">
-                        Hà Nội
-                    </span>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between">
-                    <div>
-                        <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2 group-hover:text-amber-600 transition-colors">
-                            Làng Gốm Bát Tràng
-                        </h3>
-                        <p class="text-sm text-stone-600 line-clamp-3 mb-4">
-                            Nổi tiếng với lịch sử hơn 500 năm bên bờ sông Hồng, là cái nôi của những tác phẩm gốm sứ tinh xảo, men ngọc độc đáo nức tiếng toàn cầu.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="text-xs bg-stone-100 text-stone-700 px-2.5 py-1 rounded-md">Gốm sứ</span>
-                            <span class="text-xs bg-stone-100 text-stone-700 px-2.5 py-1 rounded-md">Men ngọc</span>
-                            <span class="text-xs bg-stone-100 text-stone-700 px-2.5 py-1 rounded-md">Đồ thờ cúng</span>
-                        </div>
-                    </div>
-                    <button onclick="openVillageModal('Làng Gốm Bát Tràng', 'Hà Nội', '500+ năm', 'Nghệ nhân Ưu tú Trần Văn Xuyến', 'Nằm bên tả ngạn sông Hồng, làng gốm Bát Tràng (Gia Lâm, Hà Nội) đã tồn tại từ thế kỷ XIV. Gốm Bát Tràng nổi tiếng bởi kỹ thuật tạo hình điêu luyện, lớp men tráng đặc trưng (men ngọc, men rạn, men nâu) và họa tiết vẽ tay tỉ mỉ. Sản phẩm nơi đây không chỉ phục vụ tiêu dùng trong nước mà còn xuất khẩu đi khắp các châu lục.', 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=800&q=80', ['Ấm chén men rạn', 'Bình hoa phong thủy', 'Bộ đồ ăn cao cấp', 'Tranh gốm nghệ thuật'])" class="w-full bg-amber-50 hover:bg-amber-600 text-amber-700 hover:text-white font-semibold py-3 rounded-xl transition flex items-center justify-center gap-2 border border-amber-200">
-                        <span>Khám Phá Chi Tiết</span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Card 2: Vạn Phúc -->
-            <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-stone-200 hover:shadow-2xl transition duration-300 flex flex-col group">
-                <div class="relative h-64 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?auto=format&fit=crop&w=600&q=80" alt="Làng lụa Vạn Phúc" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                    <span class="absolute top-4 left-4 bg-stone-900/80 backdrop-blur-md text-amber-400 text-xs font-semibold px-3 py-1.5 rounded-full">
-                        Hà Nội
-                    </span>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between">
-                    <div>
-                        <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2 group-hover:text-amber-600 transition-colors">
-                            Làng Lụa Vạn Phúc
-                        </h3>
-                        <p class="text-sm text-stone-600 line-clamp-3 mb-4">
-                            Kinh đô dệt lụa tơ tằm thượng hạng của thủ đô, nơi lưu giữ kỹ thuật dệt hoa văn tinh xảo, lụa mềm mịn và óng ánh tự nhiên vượt thời gian.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="text-xs bg-stone-100 text-stone-700 px-2.5 py-1 rounded-md">Lụa tơ tằm</span>
-                            <span class="text-xs bg-stone-100 text-stone-700 px-2.5 py-1 rounded-md">Áo dài</span>
-                            <span class="text-xs bg-stone-100 text-stone-700 px-2.5 py-1 rounded-md">Khăn lụa</span>
-                        </div>
-                    </div>
-                    <button onclick="openVillageModal('Làng Lụa Vạn Phúc', 'Hà Nội', '1.000 năm', 'Nghệ nhân Nguyễn Hữu Vạn', 'Làng lụa Vạn Phúc (Hà Đông, Hà Nội) nổi tiếng với các sản phẩm lụa tơ tằm óng ả, hoa văn phong phú và độ bền cao. Lụa Vạn Phúc từng được chọn làm trang phục cho triều đình phong kiến và ngày nay là thương hiệu quốc gia được bạn bè quốc tế vô cùng ưa chuộng nhờ nét đẹp truyền thống kết hợp hiện đại.', 'https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?auto=format&fit=crop&w=800&q=80', ['Lụa tơ tằm hoa văn nổi', 'Khăn quàng cổ cao cấp', 'Áo dài truyền thống', 'Vải may mặc thời trang'])" class="w-full bg-amber-50 hover:bg-amber-600 text-amber-700 hover:text-white font-semibold py-3 rounded-xl transition flex items-center justify-center gap-2 border border-amber-200">
-                        <span>Khám Phá Chi Tiết</span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Card 3: Đông Hồ -->
-            <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-stone-200 hover:shadow-2xl transition duration-300 flex flex-col group">
-                <div class="relative h-64 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1582561234710-5346045610fb?auto=format&fit=crop&w=600&q=80" alt="Làng tranh Đông Hồ" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                    <span class="absolute top-4 left-4 bg-stone-900/80 backdrop-blur-md text-amber-400 text-xs font-semibold px-3 py-1.5 rounded-full">
-                        Bắc Ninh
-                    </span>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between">
-                    <div>
-                        <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2 group-hover:text-amber-600 transition-colors">
-                            Làng Tranh Đông Hồ
-                        </h3>
-                        <p class="text-sm text-stone-600 line-clamp-3 mb-4">
-                            Nơi khai sinh dòng tranh dân gian khắc gỗ độc đáo trên giấy điệp óng ánh, sử dụng màu sắc hoàn toàn tự nhiên từ lá cây, vỏ sò và than tre.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="text-xs bg-stone-100 text-stone-700 px-2.5 py-1 rounded-md">Tranh dân gian</span>
-                            <span class="text-xs bg-stone-100 text-stone-700 px-2.5 py-1 rounded-md">Giấy điệp</span>
-                            <span class="text-xs bg-stone-100 text-stone-700 px-2.5 py-1 rounded-md">Văn hóa Tết</span>
-                        </div>
-                    </div>
-                    <button onclick="openVillageModal('Làng Tranh Đông Hồ', 'Bắc Ninh', '400+ năm', 'Nghệ nhân Nguyễn Hữu Sam', 'Làng tranh Đông Hồ (Song Hồ, Thuận Thành, Bắc Ninh) nổi tiếng với nghệ thuật làm tranh dân gian in bản khắc gỗ. Điểm đặc biệt là giấy làm tranh quét vỏ điệp óng ánh lấp lánh, màu sắc tự nhiên từ lá tre, gạch non và hoa hòe không phai mờ theo thời gian, mang đậm dấu ấn Tết cổ truyền Việt Nam.', 'https://images.unsplash.com/photo-1582561234710-5346045610fb?auto=format&fit=crop&w=800&q=80', ['Tranh Đám cưới chuột', 'Tranh Vinh hoa phú quý', 'Tranh Lợn đàn', 'Bộ sưu tập Tết cổ truyền'])" class="w-full bg-amber-50 hover:bg-amber-600 text-amber-700 hover:text-white font-semibold py-3 rounded-xl transition flex items-center justify-center gap-2 border border-amber-200">
-                        <span>Khám Phá Chi Tiết</span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Card 4: Nón Lá Chuông -->
-            <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-stone-200 hover:shadow-2xl transition duration-300 flex flex-col group">
-                <div class="relative h-64 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" alt="Làng nón lá Chuông" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                    <span class="absolute top-4 left-4 bg-stone-900/80 backdrop-blur-md text-amber-400 text-xs font-semibold px-3 py-1.5 rounded-full">
-                        Hà Nội
-                    </span>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between">
-                    <div>
-                        <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2 group-hover:text-amber-600 transition-colors">
-                            Làng Nón Lá Chuông
-                        </h3>
-                        <p class="text-sm text-stone-600 line-clamp-3 mb-4">
-                            Biểu tượng dịu dàng của người phụ nữ Việt Nam, chuyên chuốt và khâu nên những chiếc nón trắng thanh tao, lồng ghép tranh thơ mộng dưới ánh nắng.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="text-xs bg-stone-100 text-stone-700 px-2.5 py-1 rounded-md">Nón lá</span>
-                            <span class="text-xs bg-stone-100 text-stone-700 px-2.5 py-1 rounded-md">Thủ công</span>
-                            <span class="text-xs bg-stone-100 text-stone-700 px-2.5 py-1 rounded-md">Nón bài thơ</span>
-                        </div>
-                    </div>
-                    <button onclick="openVillageModal('Làng Nón Lá Chuông', 'Hà Nội', 'Trăm năm', 'Nghệ nhân Lê Thị Năm', 'Làng Chuông (Thanh Oai, Hà Nội) từ lâu đã nổi tiếng với nghề làm nón lá. Nón lá Chuông mỏng manh nhưng rất bền chắc, đặc biệt là loại nón bài thơ lồng những câu thơ và phong cảnh Huế, Hà Nội khi soi lên ánh sáng. Đây là món quà lưu niệm đậm hồn dân tộc được du khách thế giới say mê.', 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80', ['Nón lá truyền thống', 'Nón bài thơ lồng ảnh', 'Nón quai thao hội làng', 'Nón mini trang trí'])" class="w-full bg-amber-50 hover:bg-amber-600 text-amber-700 hover:text-white font-semibold py-3 rounded-xl transition flex items-center justify-center gap-2 border border-amber-200">
-                        <span>Khám Phá Chi Tiết</span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Card 5: Mây Tre Đan Phú Vinh -->
-            <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-stone-200 hover:shadow-2xl transition duration-300 flex flex-col group">
-                <div class="relative h-64 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1590736969955-71cc9480175f?auto=format&fit=crop&w=600&q=80" alt="Làng mây tre đan Phú Vinh" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                    <span class="absolute top-4 left-4 bg-stone-900/80 backdrop-blur-md text-amber-400 text-xs font-semibold px-3 py-1.5 rounded-full">
-                        Hà Nội
-                    </span>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between">
-                    <div>
-                        <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2 group-hover:text-amber-600 transition-colors">
-                            Làng Mây Tre Đan Phú Vinh
-                        </h3>
-                        <p class="text-sm text-stone-600 line-clamp-3 mb-4">
-                            Biến những thanh tre, sợi mây đơn sơ thành các tác phẩm nghệ thuật nội thất, đèn trang trí và giỏ quà có độ tinh xảo tuyệt mỹ đạt tiêu chuẩn quốc tế.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="text-xs bg-stone-100 text-stone-700 px-2.5 py-1 rounded-md">Mây tre đan</span>
-                            <span class="text-xs bg-stone-100 text-stone-700 px-2.5 py-1 rounded-md">Đèn mây</span>
-                            <span class="text-xs bg-stone-100 text-stone-700 px-2.5 py-1 rounded-md">Nội thất</span>
-                        </div>
-                    </div>
-                    <button onclick="openVillageModal('Làng Mây Tre Đan Phú Vinh', 'Hà Nội', '400 năm', 'Nghệ nhân Nguyễn Văn Trung', 'Nằm tại xã Phú Nghĩa (Chương Mỹ, Hà Nội), làng nghề mây tre đan Phú Vinh nổi danh với hàng nghìn mẫu mã sản phẩm gia dụng và mỹ nghệ cao cấp. Dưới bàn tay tài hoa của nghệ nhân, chất liệu thiên nhiên thân thiện với môi trường được uốn nắn thành đèn lồng, bàn ghế, giỏ đựng hoa quả đẹp mắt và xuất khẩu đi châu Âu, Mỹ.', 'https://images.unsplash.com/photo-1590736969955-71cc9480175f?auto=format&fit=crop&w=800&q=80', ['Đèn thả trần mây tre', 'Giỏ đựng quà thủ công', 'Ghế mây thư giãn', 'Tấm bình phong nghệ thuật'])" class="w-full bg-amber-50 hover:bg-amber-600 text-amber-700 hover:text-white font-semibold py-3 rounded-xl transition flex items-center justify-center gap-2 border border-amber-200">
-                        <span>Khám Phá Chi Tiết</span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Card 6: Làng Đúc Đồng Phường Đúc -->
-            <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-stone-200 hover:shadow-2xl transition duration-300 flex flex-col group">
-                <div class="relative h-64 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80" alt="Làng đúc đồng Phường Đúc" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                    <span class="absolute top-4 left-4 bg-stone-900/80 backdrop-blur-md text-amber-400 text-xs font-semibold px-3 py-1.5 rounded-full">
-                        Thừa Thiên Huế
-                    </span>
-                </div>
-                <div class="p-6 flex-1 flex flex-col justify-between">
-                    <div>
-                        <h3 class="font-serif text-2xl font-bold text-stone-900 mb-2 group-hover:text-amber-600 transition-colors">
-                            Làng Đúc Đồng Huế
-                        </h3>
-                        <p class="text-sm text-stone-600 line-clamp-3 mb-4">
-                            Nơi lưu giữ kỹ thuật đúc đồng đỉnh cao từng phục vụ cho triều đình nhà Nguyễn, tạo nên những chiếc đỉnh đồng, chuông chùa và tượng Phật uy nghi.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="text-xs bg-stone-100 text-stone-700 px-2.5 py-1 rounded-md">Đúc đồng mỹ nghệ</span>
-                            <span class="text-xs bg-stone-100 text-stone-700 px-2.5 py-1 rounded-md">Đỉnh đồng</span>
-                            <span class="text-xs bg-stone-100 text-stone-700 px-2.5 py-1 rounded-md">Chuông gia bảo</span>
-                        </div>
-                    </div>
-                    <button onclick="openVillageModal('Làng Đúc Đồng Phường Đúc', 'Thừa Thiên Huế', 'Hơn 400 năm', 'Nghệ nhân Nguyễn Văn Hường', 'Làng nghề đúc đồng Phường Đúc nằm dọc bờ sông Hương (TP. Huế) đã có lịch sử từ thế kỷ XVII dưới thời các Chúa Nguyễn. Nơi đây từng đúc các đỉnh đồng ngự trên Đại Nội Huế, chuông cho các ngôi chùa lớn khắp cả nước. Kỹ thuật đúc thủ công truyền thống dung hòa giữa lửa, đồng nóng chảy và tâm huyết nghệ nhân tạo nên những kiệt tác trường tồn.', 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80', ['Đỉnh đồng tam khí', 'Chuông phong thủy', 'Tượng đồng nghệ thuật', 'Lư hương chạm khắc'])" class="w-full bg-amber-50 hover:bg-amber-600 text-amber-700 hover:text-white font-semibold py-3 rounded-xl transition flex items-center justify-center gap-2 border border-amber-200">
-                        <span>Khám Phá Chi Tiết</span>
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="ban-do" class="py-24 bg-stone-900 text-white relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#d97706_1px,transparent_1px)] [background-size:24px_24px]"></div>
-    
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="text-amber-400 font-semibold tracking-wider uppercase text-sm block mb-3">
-                <i class="fa-solid fa-compass"></i> KHÔNG GIAN BẢN ĐỒ VĂN HÓA
-            </span>
-            <h2 class="font-serif text-3xl sm:text-5xl font-bold mb-4">
-                Khám Phá Làng Nghề Theo Vùng Miền
-            </h2>
-            <p class="text-stone-400">
-                Chọn khu vực bạn muốn tìm hiểu để khám phá đặc sản thủ công truyền thống đặc trưng của từng miền đất nước.
-            </p>
-
-            <!-- Region Filters -->
-            <div class="flex flex-wrap items-center justify-center gap-3 mt-8">
-                <button onclick="filterRegion('all')" class="region-btn px-6 py-2.5 rounded-full font-medium text-sm bg-amber-600 text-white transition shadow-md">Tất Cả Miền</button>
-                <button onclick="filterRegion('bac')" class="region-btn px-6 py-2.5 rounded-full font-medium text-sm bg-stone-800 text-stone-300 hover:bg-stone-700 transition">Miền Bắc</button>
-                <button onclick="filterRegion('trung')" class="region-btn px-6 py-2.5 rounded-full font-medium text-sm bg-stone-800 text-stone-300 hover:bg-stone-700 transition">Miền Trung</button>
-                <button onclick="filterRegion('nam')" class="region-btn px-6 py-2.5 rounded-full font-medium text-sm bg-stone-800 text-stone-300 hover:bg-stone-700 transition">Miền Nam</button>
-            </div>
-        </div>
-
-        <!-- Region Cards Grid -->
-        <div id="region-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Bac Item -->
-            <div class="region-card bg-stone-800/80 backdrop-blur-md rounded-2xl border border-stone-700 p-6 flex flex-col justify-between" data-region="bac">
-                <div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs uppercase tracking-wider bg-amber-500/20 text-amber-400 px-3 py-1 rounded-full font-bold">Miền Bắc</span>
-                        <i class="fa-solid fa-mountain-sun text-amber-400 text-xl"></i>
-                    </div>
-                    <h3 class="font-serif text-2xl font-bold mb-3 text-white">Cái Nôi Di Sảng Ngàn Năm</h3>
-                    <p class="text-stone-300 text-sm mb-6 leading-relaxed">
-                        Nơi tập trung các làng nghề cổ xưa nhất: Gốm Bát Tràng, Lụa Vạn Phúc, Tranh Đông Hồ, Nón Lá Chuông, Mây tre đan Phú Vinh, Gốm Phù Lãng, Chạm khắc đá Ninh Vân...
-                    </p>
-                </div>
-                <div class="border-t border-stone-700 pt-4 flex items-center justify-between">
-                    <span class="text-xs text-stone-400">Hơn 250+ làng nghề tiêu biểu</span>
-                    <a href="#lang-nghe" class="text-amber-400 text-sm font-semibold hover:underline flex items-center gap-1">Xem chi tiết <i class="fa-solid fa-chevron-right text-xs"></i></a>
-                </div>
-            </div>
-
-            <!-- Trung Item -->
-            <div class="region-card bg-stone-800/80 backdrop-blur-md rounded-2xl border border-stone-700 p-6 flex flex-col justify-between" data-region="trung">
-                <div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs uppercase tracking-wider bg-amber-500/20 text-amber-400 px-3 py-1 rounded-full font-bold">Miền Trung</span>
-                        <i class="fa-solid fa-water text-amber-400 text-xl"></i>
-                    </div>
-                    <h3 class="font-serif text-2xl font-bold mb-3 text-white">Tinh Hoa Đất Xứ Quảng & Cố Đô</h3>
-                    <p class="text-stone-300 text-sm mb-6 leading-relaxed">
-                        Đậm đà dấu ấn cung đình và văn hóa Chăm Pa: Đúc đồng Phường Đúc (Huế), Làng gốm Thanh Hà (Quảng Nam), Làng chiếu cóói bàn thạch, Chạm trổ mộc Kim Bồng...
-                    </p>
-                </div>
-                <div class="border-t border-stone-700 pt-4 flex items-center justify-between">
-                    <span class="text-xs text-stone-400">Hơn 150+ làng nghề tiêu biểu</span>
-                    <a href="#lang-nghe" class="text-amber-400 text-sm font-semibold hover:underline flex items-center gap-1">Xem chi tiết <i class="fa-solid fa-chevron-right text-xs"></i></a>
-                </div>
-            </div>
-
-            <!-- Nam Item -->
-            <div class="region-card bg-stone-800/80 backdrop-blur-md rounded-2xl border border-stone-700 p-6 flex flex-col justify-between" data-region="nam">
-                <div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs uppercase tracking-wider bg-amber-500/20 text-amber-400 px-3 py-1 rounded-full font-bold">Miền Nam</span>
-                        <i class="fa-solid fa-seedling text-amber-400 text-xl"></i>
-                    </div>
-                    <h3 class="font-serif text-2xl font-bold mb-3 text-white">Sắc Màu Miệt Vườn Sông Nước</h3>
-                    <p class="text-stone-300 text-sm mb-6 leading-relaxed">
-                        Gắn liền với sản vật phương Nam phong phú: Làng nghề dệt chiếu Định Yên (Đồng Tháp), Làng hoa kiểng Sa Đéc, Gốm đỏ Vĩnh Long, Đờn ca tài tử & thủ công lục bình...
-                    </p>
-                </div>
-                <div class="border-t border-stone-700 pt-4 flex items-center justify-between">
-                    <span class="text-xs text-stone-400">Hơn 120+ làng nghề tiêu biểu</span>
-                    <a href="#lang-nghe" class="text-amber-400 text-sm font-semibold hover:underline flex items-center gap-1">Xem chi tiết <i class="fa-solid fa-chevron-right text-xs"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="text-amber-600 font-semibold tracking-wider uppercase text-sm block mb-3">
-                <i class="fa-solid fa-user-tie"></i> NHỮNG NGƯỜI GIỮ LỬA
-            </span>
-            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-stone-900 mb-4">
-                Chân Dung Nghệ Nhân Tiêu Biểu
-            </h2>
-            <p class="text-stone-600">
-                Họ là những "báu vật nhân văn sống", suốt đời tận tụy truyền lửa và gìn giữ tinh hoa cho mai sau.
-            </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Artisan 1 -->
-            <div class="bg-stone-50 rounded-2xl p-6 border border-stone-200 text-center relative group">
-                <div class="w-32 h-32 rounded-full overflow-hidden mx-auto mb-6 border-4 border-amber-600 shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=400&q=80" alt="Nghệ nhân" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                </div>
-                <h3 class="font-serif text-xl font-bold text-stone-900 mb-1">Nghệ Nhân Ưu Tú Trần Thị Mai</h3>
-                <p class="text-amber-600 text-xs font-semibold mb-4 uppercase tracking-wider">Làng Lụa Vạn Phúc - Hà Nội</p>
-                <p class="text-stone-600 text-sm italic mb-6">
-                    "Giữ nghề không chỉ là giữ cái khung cửi, mà là giữ lấy linh hồn và nếp sống của cha ông truyền lại qua từng thớ lụa."
-                </p>
-                <div class="inline-flex items-center gap-2 text-xs font-bold bg-amber-100 text-amber-800 px-3 py-1 rounded-full">
-                    <i class="fa-solid fa-medal"></i> Hơn 45 năm gắn bó với khung cửi
-                </div>
-            </div>
-
-            <!-- Artisan 2 -->
-            <div class="bg-stone-50 rounded-2xl p-6 border border-stone-200 text-center relative group">
-                <div class="w-32 h-32 rounded-full overflow-hidden mx-auto mb-6 border-4 border-amber-600 shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" alt="Nghệ nhân" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                </div>
-                <h3 class="font-serif text-xl font-bold text-stone-900 mb-1">Nghệ Nhân Lê Văn Cường</h3>
-                <p class="text-amber-600 text-xs font-semibold mb-4 uppercase tracking-wider">Làng Gốm Bát Tràng - Hà Nội</p>
-                <p class="text-stone-600 text-sm italic mb-6">
-                    "Đất sét có linh hồn riêng. Chỉ khi người thợ đặt trọn tâm huyết, ngọn lửa lò nung mới tạo ra được những kiệt tác men ngọc hoàn mỹ."
-                </p>
-                <div class="inline-flex items-center gap-2 text-xs font-bold bg-amber-100 text-amber-800 px-3 py-1 rounded-full">
-                    <i class="fa-solid fa-medal"></i> Bậc thầy tạo dáng & men cổ
-                </div>
-            </div>
-
-            <!-- Artisan 3 -->
-            <div class="bg-stone-50 rounded-2xl p-6 border border-stone-200 text-center relative group">
-                <div class="w-32 h-32 rounded-full overflow-hidden mx-auto mb-6 border-4 border-amber-600 shadow-lg">
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" alt="Nghệ nhân" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                </div>
-                <h3 class="font-serif text-xl font-bold text-stone-900 mb-1">Nghệ Nhân Nguyễn Thị Hằng</h3>
-                <p class="text-amber-600 text-xs font-semibold mb-4 uppercase tracking-wider">Làng Tranh Đông Hồ - Bắc Ninh</p>
-                <p class="text-stone-600 text-sm italic mb-6">
-                    "Mỗi bức tranh in trên giấy điệp là một ước vọng về cuộc sống bình an, ấm no và hạnh phúc gửi đến mọi gia đình Việt mỗi dịp xuân về."
-                </p>
-                <div class="inline-flex items-center gap-2 text-xs font-bold bg-amber-100 text-amber-800 px-3 py-1 rounded-full">
-                    <i class="fa-solid fa-medal"></i> Truyền nhân đời thứ 4 khắc gỗ
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="cua-hang" class="py-24 bg-stone-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
-            <div>
-                <span class="text-amber-600 font-semibold tracking-wider uppercase text-sm block mb-3">
-                    <i class="fa-solid fa-store"></i> SẢN PHẨM THỦ CÔNG TINH HOA
-                </span>
-                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-stone-900">
-                    Đặt Mua Sản Phẩm Làng Nghề
-                </h2>
-            </div>
-            <p class="text-stone-600 max-w-md mt-4 md:mt-0 text-sm">
-                Ủng hộ trực tiếp các nghệ nhân truyền thống bằng cách sở hữu các sản phẩm thủ công nguyên bản, giao hàng tận nơi trên toàn quốc.
-            </p>
-        </div>
-
-        <!-- Products Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Product 1 -->
-            <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-stone-200 flex flex-col group">
-                <div class="relative h-60 overflow-hidden bg-stone-100">
-                    <img src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=500&q=80" alt="Bình hoa gốm sứ" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <span class="absolute top-3 left-3 bg-amber-600 text-white text-xs font-bold px-2.5 py-1 rounded-md">Bát Tràng</span>
-                </div>
-                <div class="p-5 flex-1 flex flex-col justify-between">
-                    <div>
-                        <h3 class="font-bold text-stone-900 text-lg mb-1 group-hover:text-amber-600 transition-colors">Bình Hoa Gốm Men Ngọc Cổ</h3>
-                        <p class="text-xs text-stone-500 mb-3">Chế tác thủ công bởi nghệ nhân Bát Tràng</p>
-                        <div class="text-amber-600 font-bold text-lg mb-4">1.250.000 đ</div>
-                    </div>
-                    <button onclick="orderProduct('Bình Hoa Gốm Men Ngọc Cổ', '1.250.000 đ')" class="w-full bg-stone-900 hover:bg-amber-600 text-white font-semibold py-2.5 rounded-xl transition text-sm flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-cart-plus"></i> Đặt Mua Ngay
-                    </button>
-                </div>
-            </div>
-
-            <!-- Product 2 -->
-            <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-stone-200 flex flex-col group">
-                <div class="relative h-60 overflow-hidden bg-stone-100">
-                    <img src="https://images.unsplash.com/photo-1606760227091-3dd870d97f1d?auto=format&fit=crop&w=500&q=80" alt="Khăn lụa tơ tằm" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <span class="absolute top-3 left-3 bg-amber-600 text-white text-xs font-bold px-2.5 py-1 rounded-md">Vạn Phúc</span>
-                </div>
-                <div class="p-5 flex-1 flex flex-col justify-between">
-                    <div>
-                        <h3 class="font-bold text-stone-900 text-lg mb-1 group-hover:text-amber-600 transition-colors">Khăn Lụa Tơ Tằm Thượng Hạng</h3>
-                        <p class="text-xs text-stone-500 mb-3">100% tơ tằm tự nhiên Vạn Phúc</p>
-                        <div class="text-amber-600 font-bold text-lg mb-4">680.000 đ</div>
-                    </div>
-                    <button onclick="orderProduct('Khăn Lụa Tơ Tằm Thượng Hạng', '680.000 đ')" class="w-full bg-stone-900 hover:bg-amber-600 text-white font-semibold py-2.5 rounded-xl transition text-sm flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-cart-plus"></i> Đặt Mua Ngay
-                    </button>
-                </div>
-            </div>
-
-            <!-- Product 3 -->
-            <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-stone-200 flex flex-col group">
-                <div class="relative h-60 overflow-hidden bg-stone-100">
-                    <img src="https://images.unsplash.com/photo-1590736969955-71cc9480175f?auto=format&fit=crop&w=500&q=80" alt="Đèn mây tre đan" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <span class="absolute top-3 left-3 bg-amber-600 text-white text-xs font-bold px-2.5 py-1 rounded-md">Phú Vinh</span>
-                </div>
-                <div class="p-5 flex-1 flex flex-col justify-between">
-                    <div>
-                        <h3 class="font-bold text-stone-900 text-lg mb-1 group-hover:text-amber-600 transition-colors">Đèn Thả Trần Mây Tre Nghệ Thuật</h3>
-                        <p class="text-xs text-stone-500 mb-3">Đan tay thủ công mỹ nghệ Phú Nghĩa</p>
-                        <div class="text-amber-600 font-bold text-lg mb-4">850.000 đ</div>
-                    </div>
-                    <button onclick="orderProduct('Đèn Thả Trần Mây Tre Nghệ Thuật', '850.000 đ')" class="w-full bg-stone-900 hover:bg-amber-600 text-white font-semibold py-2.5 rounded-xl transition text-sm flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-cart-plus"></i> Đặt Mua Ngay
-                    </button>
-                </div>
-            </div>
-
-            <!-- Product 4 -->
-            <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-stone-200 flex flex-col group">
-                <div class="relative h-60 overflow-hidden bg-stone-100">
-                    <img src="https://images.unsplash.com/photo-1582561234710-5346045610fb?auto=format&fit=crop&w=500&q=80" alt="Bộ tranh Đông Hồ" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                    <span class="absolute top-3 left-3 bg-amber-600 text-white text-xs font-bold px-2.5 py-1 rounded-md">Đông Hồ</span>
-                </div>
-                <div class="p-5 flex-1 flex flex-col justify-between">
-                    <div>
-                        <h3 class="font-bold text-stone-900 text-lg mb-1 group-hover:text-amber-600 transition-colors">Bộ Tranh Dân Gian Đông Hồ (4 Bức)</h3>
-                        <p class="text-xs text-stone-500 mb-3">In khắc gỗ trên giấy điệp truyền thống</p>
-                        <div class="text-amber-600 font-bold text-lg mb-4">450.000 đ</div>
-                    </div>
-                    <button onclick="orderProduct('Bộ Tranh Dân Gian Đông Hồ (4 Bức)', '450.000 đ')" class="w-full bg-stone-900 hover:bg-amber-600 text-white font-semibold py-2.5 rounded-xl transition text-sm flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-cart-plus"></i> Đặt Mua Ngay
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<footer id="lien-he" class="bg-stone-950 text-white pt-16 pb-12 border-t border-stone-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-            <div class="space-y-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-amber-600 flex items-center justify-center text-white font-serif font-bold text-xl">
-                        VN
-                    </div>
-                    <span class="font-serif text-2xl font-bold tracking-wide text-amber-400">Làng Nghề Việt</span>
-                </div>
-                <p class="text-stone-400 text-sm leading-relaxed">
-                    Cổng thông tin và tôn vinh di sản văn hóa các làng nghề truyền thống Việt Nam. Gìn giữ và lan tỏa hồn quê đất Việt đến muôn nơi.
-                </p>
-                <div class="flex items-center gap-3 text-stone-300">
-                    <a href="#" class="w-10 h-10 rounded-full bg-stone-900 hover:bg-amber-600 flex items-center justify-center transition"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-stone-900 hover:bg-amber-600 flex items-center justify-center transition"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-stone-900 hover:bg-amber-600 flex items-center justify-center transition"><i class="fa-brands fa-youtube"></i></a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-stone-900 hover:bg-amber-600 flex items-center justify-center transition"><i class="fa-brands fa-tiktok"></i></a>
-                </div>
-            </div>
-
-            <div>
-                <h3 class="font-serif text-lg font-bold mb-4 text-amber-400">Khám Phá Nhanh</h3>
-                <ul class="space-y-2.5 text-sm text-stone-400">
-                    <li><a href="#trang-chu" class="hover:text-amber-400 transition">Trang Chủ</a></li>
-                    <li><a href="#gioi-thieu" class="hover:text-amber-400 transition">Tổng Quan Di Sản</a></li>
-                    <li><a href="#lang-nghe" class="hover:text-amber-400 transition">Làng Nghề Nổi Bật</a></li>
-                    <li><a href="#ban-do" class="hover:text-amber-400 transition">Bản Đồ Vùng Miền</a></li>
-                    <li><a href="#cua-hang" class="hover:text-amber-400 transition">Sản Phẩm Thủ Công</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h3 class="font-serif text-lg font-bold mb-4 text-amber-400">Làng Nghề Tiêu Biểu</h3>
-                <ul class="space-y-2.5 text-sm text-stone-400">
-                    <li><a href="#lang-nghe" class="hover:text-amber-400 transition">Làng Gốm Bát Tràng (Hà Nội)</a></li>
-                    <li><a href="#lang-nghe" class="hover:text-amber-400 transition">Làng Lụa Vạn Phúc (Hà Nội)</a></li>
-                    <li><a href="#lang-nghe" class="hover:text-amber-400 transition">Làng Tranh Đông Hồ (Bắc Ninh)</a></li>
-                    <li><a href="#lang-nghe" class="hover:text-amber-400 transition">Làng Nón Lá Chuông (Hà Nội)</a></li>
-                    <li><a href="#lang-nghe" class="hover:text-amber-400 transition">Làng Đúc Đồng Phường Đúc (Huế)</a></li>
-                </ul>
-            </div>
-
-            <div>
-                <h3 class="font-serif text-lg font-bold mb-4 text-amber-400">Đăng Ký Nhận Tin</h3>
-                <p class="text-stone-400 text-sm mb-4">Nhận thông tin về các triển lãm thủ công và làng nghề mới nhất.</p>
-                <form onsubmit="handleNewsletter(event)" class="space-y-3">
-                    <input type="email" placeholder="Nhập email của bạn..." required class="w-full px-4 py-3 rounded-xl bg-stone-900 border border-stone-800 text-white placeholder-stone-500 text-sm focus:outline-none focus:border-amber-500">
-                    <button type="submit" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 rounded-xl text-sm transition shadow-lg">
-                        Đăng Ký Ngay
-                    </button>
-                </form>
-            </div>
-        </div>
-
-        <div class="border-t border-stone-800 pt-8 text-center text-stone-500 text-sm">
-            <p>&copy; 2026 Tinh Hoa Làng Nghề Việt Nam. Bản quyền thuộc về di sản văn hóa dân tộc.</p>
-        </div>
-    </div>
-</footer>
-
-<!-- Village Detail Modal -->
-<div id="village-modal" class="fixed inset-0 z-50 hidden bg-stone-950/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-white rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl relative transform transition-all animate-in fade-in zoom-in duration-300">
-        <button onclick="closeVillageModal()" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-stone-900/70 hover:bg-stone-900 text-white flex items-center justify-center transition">
-            <i class="fa-solid fa-xmark text-lg"></i>
+        <button class="nav-link" data-tab="map" onclick="switchTab('map')">
+          <i data-lucide="map-pin"></i> Bản đồ Làng nghề
         </button>
-
-        <div class="relative h-72 sm:h-80">
-            <img id="modal-img" src="" alt="Làng nghề" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/30 to-transparent"></div>
-            <div class="absolute bottom-6 left-6 right-6">
-                <span id="modal-location" class="inline-block bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-full mb-2"></span>
-                <h2 id="modal-title" class="font-serif text-2xl sm:text-4xl font-bold text-white"></h2>
-            </div>
-        </div>
-
-        <div class="p-6 sm:p-8 space-y-6 max-h-[60vh] overflow-y-auto">
-            <div class="grid grid-cols-2 gap-4 pb-4 border-b border-stone-100">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
-                        <i class="fa-solid fa-clock-rotate-left"></i>
-                    </div>
-                    <div>
-                        <span class="text-xs text-stone-500 block">Lịch sử phát triển</span>
-                        <span id="modal-age" class="font-bold text-stone-900 text-sm"></span>
-                    </div>
-                </div>
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
-                        <i class="fa-solid fa-user-gear"></i>
-                    </div>
-                    <div>
-                        <span class="text-xs text-stone-500 block">Nghệ nhân tiêu biểu</span>
-                        <span id="modal-artisan" class="font-bold text-stone-900 text-sm"></span>
-                    </div>
-                </div>
-            </div>
-
-            <div>
-                <h3 class="font-serif text-lg font-bold text-stone-900 mb-2">Lịch Sử & Giá Trị Văn Hóa</h3>
-                <p id="modal-desc" class="text-stone-600 leading-relaxed text-sm"></p>
-            </div>
-
-            <div>
-                <h3 class="font-serif text-lg font-bold text-stone-900 mb-3">Sản Phẩm Đặc Trưng</h3>
-                <div id="modal-products" class="flex flex-wrap gap-2"></div>
-            </div>
-        </div>
-
-        <div class="bg-stone-50 px-6 sm:px-8 py-4 border-t border-stone-200 flex justify-end gap-3">
-            <button onclick="closeVillageModal()" class="bg-stone-200 hover:bg-stone-300 text-stone-800 font-semibold px-6 py-2.5 rounded-xl transition text-sm">Đóng</button>
-            <a href="#cua-hang" onclick="closeVillageModal()" class="bg-amber-600 hover:bg-amber-700 text-white font-semibold px-6 py-2.5 rounded-xl transition text-sm flex items-center gap-2">
-                <i class="fa-solid fa-basket-shopping"></i> Xem Sản Phẩm Tương Tự
-            </a>
-        </div>
-    </div>
-</div>
-
-<!-- Order Modal -->
-<div id="order-modal" class="fixed inset-0 z-50 hidden bg-stone-950/80 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 relative shadow-2xl animate-in fade-in zoom-in duration-300">
-        <button onclick="closeOrderModal()" class="absolute top-4 right-4 text-stone-400 hover:text-stone-700">
-            <i class="fa-solid fa-xmark text-xl"></i>
+        <button class="nav-link" data-tab="itinerary" onclick="switchTab('itinerary')">
+          <i data-lucide="calendar"></i> Lịch trình Du lịch
         </button>
-        <div class="text-center mb-6">
-            <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-3 text-2xl">
-                <i class="fa-solid fa-bag-shopping"></i>
-            </div>
-            <h3 class="font-serif text-2xl font-bold text-stone-900">Xác Nhận Đặt Sản Phẩm</h3>
-            <p id="order-product-name" class="text-amber-600 font-bold mt-1 text-sm"></p>
-            <p id="order-product-price" class="text-stone-500 text-xs mt-0.5"></p>
-        </div>
+        <button class="nav-link" data-tab="shop" onclick="switchTab('shop')">
+          <i data-lucide="shopping-bag"></i> Mua sắm
+        </button>
+        <button class="nav-link" data-tab="contact" onclick="switchTab('contact')">
+          <i data-lucide="mail"></i> Liên hệ
+        </button>
+      </nav>
 
-        <form onsubmit="submitOrder(event)" class="space-y-4">
-            <div>
-                <label class="block text-xs font-bold text-stone-700 uppercase mb-1">Họ và tên</label>
-                <input type="text" required class="w-full px-4 py-2.5 rounded-xl border border-stone-300 text-sm focus:outline-none focus:border-amber-600" placeholder="Nhập họ tên của bạn...">
-            </div>
-            <div>
-                <label class="block text-xs font-bold text-stone-700 uppercase mb-1">Số điện thoại</label>
-                <input type="tel" required class="w-full px-4 py-2.5 rounded-xl border border-stone-300 text-sm focus:outline-none focus:border-amber-600" placeholder="Nhập số điện thoại...">
-            </div>
-            <div>
-                <label class="block text-xs font-bold text-stone-700 uppercase mb-1">Địa chỉ giao hàng</label>
-                <textarea required rows="2" class="w-full px-4 py-2.5 rounded-xl border border-stone-300 text-sm focus:outline-none focus:border-amber-600" placeholder="Nhập địa chỉ nhận hàng chi tiết..."></textarea>
-            </div>
-            <button type="submit" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 rounded-xl text-sm transition shadow-lg">
-                Gửi Đơn Đặt Hàng
+      <div class="nav-actions">
+        <button class="cart-btn" onclick="toggleCartModal()">
+          <i data-lucide="shopping-cart"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT AREA -->
+  <main class="main-content">
+
+    <!-- 1. TRANG CHỦ (HOME) -->
+    <section id="home" class="tab-content active">
+      <div class="hero-banner">
+        <div class="hero-text">
+          <span class="badge">Di sản Văn hóa Việt</span>
+          <h1>Khám Phá Hồn Việt Qua Các Làng Nghề Truyền Thống</h1>
+          <p>Hành trình kết nối du khách quốc tế với hàng trăm làng nghề thủ công mỹ nghệ hàng ngàn năm tuổi dọc miền đất nước.</p>
+          <div class="hero-btns">
+            <button class="btn btn-primary" onclick="switchTab('map')">
+              <i data-lucide="map"></i> Khám phá Bản đồ
             </button>
+            <button class="btn btn-outline" onclick="switchTab('itinerary')">
+              <i data-lucide="compass"></i> Lên lịch trình ngay
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card" onclick="switchTab('map')">
+          <div class="feature-icon"><i data-lucide="map-pin"></i></div>
+          <h3>Bản Đồ Tương Tác</h3>
+          <p>Tra cứu vị trí, lịch sử và đặc sản làng nghề theo từng tỉnh thành Bắc - Trung - Nam.</p>
+        </div>
+        <div class="feature-card" onclick="switchTab('itinerary')">
+          <div class="feature-icon"><i data-lucide="route"></i></div>
+          <h3>Lịch Trình Thiết Kế Riêng</h3>
+          <p>Gợi ý tour du lịch trải nghiệm làm thợ thủ công cho du khách nước ngoài.</p>
+        </div>
+        <div class="feature-card" onclick="switchTab('shop')">
+          <div class="feature-icon"><i data-lucide="gift"></i></div>
+          <h3>Sản Phẩm Chính Gốc</h3>
+          <p>Đặt mua các mặt hàng gốm sứ, lụa tơ tằm, mây tre đan trực tiếp từ nghệ nhân.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. TRANG BẢN ĐỒ TƯƠNG TÁC (MAP) -->
+    <section id="map" class="tab-content">
+      <div class="section-header">
+        <h2>Bản Đồ Làng Nghề Việt Nam</h2>
+        <p>Chọn khu vực hoặc nhấp vào ghim trên bản đồ để xem chi tiết làng nghề</p>
+      </div>
+
+      <div class="map-layout">
+        <!-- Sidebar Bộ lọc & Danh sách -->
+        <div class="map-sidebar">
+          <div class="filter-box">
+            <label for="regionFilter"><i data-lucide="filter"></i> Lọc theo Khu vực:</label>
+            <select id="regionFilter" onchange="filterVillages()">
+              <option value="all">Tất cả các miền</option>
+              <option value="north">Miền Bắc</option>
+              <option value="central">Miền Trung</option>
+              <option value="south">Miền Nam</option>
+            </select>
+          </div>
+
+          <div class="village-list" id="villageList">
+            <!-- Danh sách làng nghề được load động bằng JS -->
+          </div>
+        </div>
+
+        <!-- Khung bản đồ Leaflet -->
+        <div class="map-container-wrapper">
+          <div id="interactiveMap"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. TRANG LỊCH TRÌNH DU LỊCH (ITINERARY) -->
+    <section id="itinerary" class="tab-content">
+      <div class="section-header">
+        <h2>Lập Lịch Trình Du Lịch Làng Nghề</h2>
+        <p>Gợi ý tour trải nghiệm văn hóa độc đáo dành riêng cho du khách quốc tế</p>
+      </div>
+
+      <div class="itinerary-grid">
+        <!-- Form tùy chỉnh tour -->
+        <div class="itinerary-form-card">
+          <h3><i data-lucide="sliders"></i> Tùy chỉnh chuyến đi</h3>
+          <form id="itineraryForm" onsubmit="generateCustomItinerary(event)">
+            <div class="form-group">
+              <label>Điểm xuất phát / Vùng miền:</label>
+              <select id="tourRegion">
+                <option value="north">Hà Nội & Miền Bắc (3 Ngày)</option>
+                <option value="central">Đà Nẵng - Hội An & Miền Trung (2 Ngày)</option>
+                <option value="south">TP.HCM & Đồng bằng Sông Cửu Long (2 Ngày)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Sở thích trải nghiệm:</label>
+              <div class="checkbox-group">
+                <label><input type="checkbox" value="craft" checked> Tự tay làm sản phẩm</label>
+                <label><input type="checkbox" value="food" checked> Thưởng thức ẩm thực địa phương</label>
+                <label><input type="checkbox" value="photo" checked> Chụp ảnh check-in</label>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">
+              <i data-lucide="sparkles"></i> Tạo lịch trình tối ưu
+            </button>
+          </form>
+        </div>
+
+        <!-- Kết quả lịch trình -->
+        <div class="itinerary-result-card" id="itineraryResult">
+          <!-- Hiển thị lịch trình chi tiết -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. TRANG MUA SẮM (SHOP) -->
+    <section id="shop" class="tab-content">
+      <div class="section-header">
+        <h2>Gian Hàng Sản Phẩm Làng Nghề</h2>
+        <p>Ủng hộ nghệ nhân Việt Nam qua các sản phẩm thủ công tinh xảo</p>
+      </div>
+
+      <div class="shop-controls">
+        <div class="category-tags">
+          <button class="tag active" onclick="filterProducts('all', this)">Tất cả</button>
+          <button class="tag" onclick="filterProducts('gom', this)">Gốm sứ</button>
+          <button class="tag" onclick="filterProducts('lua', this)">Lụa tơ tằm</button>
+          <button class="tag" onclick="filterProducts('may', this)">Mây tre đan</button>
+          <button class="tag" onclick="filterProducts('tranh', this)">Tranh dân gian</button>
+        </div>
+      </div>
+
+      <div class="products-grid" id="productsGrid">
+        <!-- Dữ liệu sản phẩm tạo động bằng JS -->
+      </div>
+    </section>
+
+    <!-- 5. TRANG LIÊN HỆ (CONTACT) -->
+    <section id="contact" class="tab-content">
+      <div class="section-header">
+        <h2>Liên Hệ & Hợp Tác</h2>
+        <p>Bạn là nghệ nhân, đơn vị lữ hành hay du khách cần hỗ trợ? Hãy gửi thông điệp cho chúng tôi.</p>
+      </div>
+
+      <div class="contact-container">
+        <div class="contact-info">
+          <h3>Thông tin kết nối</h3>
+          <p><i data-lucide="map-pin"></i> 144 Xuân Thủy, Cầu Giấy, Hà Nội, Việt Nam</p>
+          <p><i data-lucide="mail"></i> contact@langnghevietnam.vn</p>
+          <p><i data-lucide="phone"></i> +84 (0) 24 3838 9999</p>
+          <p><i data-lucide="clock"></i> Giờ làm việc: 08:00 - 17:30 (Thứ 2 - Thứ 6)</p>
+        </div>
+
+        <form class="contact-form" onsubmit="handleContactSubmit(event)">
+          <div class="form-group">
+            <label>Họ và tên *</label>
+            <input type="text" placeholder="John Doe / Nguyễn Văn A" required>
+          </div>
+          <div class="form-group">
+            <label>Email *</label>
+            <input type="email" placeholder="example@domain.com" required>
+          </div>
+          <div class="form-group">
+            <label>Nội dung *</label>
+            <textarea rows="4" placeholder="Nhập câu hỏi hoặc yêu cầu hỗ trợ du lịch..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary"><i data-lucide="send"></i> Gửi tin nhắn</button>
         </form>
-    </div>
-</div>
+      </div>
+    </section>
 
-<!-- Success Notification Toast -->
-<div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-32 opacity-0 transition-all duration-300 bg-stone-900 text-white px-6 py-4 rounded-2xl shadow-2xl border border-stone-800 flex items-center gap-3">
-    <div class="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center shrink-0">
-        <i class="fa-solid fa-check"></i>
-    </div>
-    <div>
-        <h4 id="toast-title" class="font-bold text-sm">Thành công!</h4>
-        <p id="toast-desc" class="text-xs text-stone-400">Yêu cầu của bạn đã được ghi nhận.</p>
-    </div>
-</div>
+  </main>
 
-<!-- Liên kết file JavaScript -->
-<script src="script.js"></script>
+  <!-- MODAL GIỎ HÀNG -->
+  <div class="modal" id="cartModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3><i data-lucide="shopping-cart"></i> Giỏ hàng của bạn</h3>
+        <button class="close-btn" onclick="toggleCartModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="cartItems">
+        <!-- Danh sách mặt hàng giỏ hàng -->
+      </div>
+      <div class="modal-footer">
+        <div class="cart-total">
+          <span>Tổng tiền:</span>
+          <strong id="cartTotal">0 VNĐ</strong>
+        </div>
+        <button class="btn btn-primary" onclick="checkout()">Thanh toán ngay</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>&copy; 2026 Bản Đồ Làng Nghề Truyền Thống Việt Nam. Bảo tồn và phát triển giá trị văn hóa dân tộc.</p>
+  </footer>
+
+  <!-- Leaflet JS for Map -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  
+  <!-- Link JS riêng -->
+  <script src="script.js"></script>
+</body>
+</html>
