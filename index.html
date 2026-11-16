@@ -16,6 +16,9 @@
 
   <!-- Link CSS riêng -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- CSS cho tính năng mới (đăng nhập, thanh toán, ngôn ngữ) -->
+  <link rel="stylesheet" href="features.css">
 </head>
 <body>
 
@@ -46,6 +49,16 @@
       </nav>
 
       <div class="nav-actions">
+        <!-- MỚI: chọn ngôn ngữ -->
+        <div class="lang-switch" id="langSwitch">
+          <button type="button" data-lang="vi" class="active">VI</button>
+          <button type="button" data-lang="en">EN</button>
+        </div>
+        <!-- MỚI: đăng nhập / tài khoản -->
+        <button type="button" class="account-btn" id="accountBtn">
+          <i data-lucide="user"></i>
+          <span id="accountLabel">Đăng nhập</span>
+        </button>
         <button class="cart-btn" onclick="toggleCartModal()">
           <i data-lucide="shopping-cart"></i>
           <span class="cart-count" id="cartCount">0</span>
@@ -247,6 +260,162 @@
     </div>
   </div>
  
+  <!-- ============ TÍNH NĂNG MỚI: MODAL ĐĂNG NHẬP / ĐĂNG KÝ ============ -->
+  <div class="modal fx-modal" id="authModal">
+    <div class="modal-content" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <h3>
+          <i data-lucide="user"></i>
+          <span data-fx-title="login">Đăng nhập</span>
+          <span data-fx-title="register" hidden>Tạo tài khoản</span>
+          <span data-fx-title="account" hidden>Tài khoản của tôi</span>
+        </h3>
+        <button class="close-btn" type="button" data-fx-close="authModal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <p class="fx-notice" id="authNotice" hidden>Vui lòng đăng nhập hoặc tạo tài khoản để tiếp tục thanh toán.</p>
+
+        <div class="fx-tabs" id="authTabs">
+          <button type="button" class="fx-tab active" data-fx-view="login">Đăng nhập</button>
+          <button type="button" class="fx-tab" data-fx-view="register">Đăng ký</button>
+        </div>
+
+        <!-- Form đăng nhập -->
+        <form id="loginForm" novalidate>
+          <div class="form-group">
+            <label for="fxLoginEmail">Email</label>
+            <input type="email" id="fxLoginEmail" placeholder="example@domain.com" autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="fxLoginPassword">Mật khẩu</label>
+            <input type="password" id="fxLoginPassword" placeholder="Tối thiểu 6 ký tự" autocomplete="current-password">
+          </div>
+          <p class="fx-error" id="fxLoginError"></p>
+          <button type="submit" class="btn btn-primary btn-block">
+            <i data-lucide="log-in"></i> Đăng nhập
+          </button>
+        </form>
+
+        <!-- Form đăng ký -->
+        <form id="registerForm" novalidate hidden>
+          <div class="form-group">
+            <label for="fxRegName">Họ và tên</label>
+            <input type="text" id="fxRegName" placeholder="Nguyễn Văn A / John Doe" autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="fxRegPhone">Số điện thoại</label>
+            <input type="tel" id="fxRegPhone" placeholder="VD: 0901234567 / +84901234567" autocomplete="tel">
+          </div>
+          <div class="form-group">
+            <label for="fxRegAddress">Địa chỉ giao hàng</label>
+            <input type="text" id="fxRegAddress" placeholder="Số nhà, đường, phường/xã, quận/huyện, tỉnh/thành phố" autocomplete="street-address">
+          </div>
+          <div class="form-group">
+            <label for="fxRegEmail">Email</label>
+            <input type="email" id="fxRegEmail" placeholder="example@domain.com" autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="fxRegPassword">Mật khẩu</label>
+            <input type="password" id="fxRegPassword" placeholder="Tối thiểu 6 ký tự" autocomplete="new-password">
+          </div>
+          <p class="fx-error" id="fxRegError"></p>
+          <button type="submit" class="btn btn-primary btn-block">
+            <i data-lucide="user-plus"></i> Tạo tài khoản
+          </button>
+        </form>
+
+        <!-- Thông tin tài khoản (khi đã đăng nhập) -->
+        <div id="accountView" hidden>
+          <div class="fx-info-row"><span>Họ và tên</span><strong id="accName"></strong></div>
+          <div class="fx-info-row"><span>Email</span><strong id="accEmail"></strong></div>
+          <div class="fx-info-row"><span>Số điện thoại</span><strong id="accPhone"></strong></div>
+          <div class="fx-info-row"><span>Địa chỉ giao hàng</span><strong id="accAddress"></strong></div>
+          <button type="button" class="btn btn-outline btn-block" id="logoutBtn">
+            <i data-lucide="log-out"></i> Đăng xuất
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TÍNH NĂNG MỚI: MODAL THANH TOÁN ============ -->
+  <div class="modal fx-modal" id="paymentModal">
+    <div class="modal-content" role="dialog" aria-modal="true">
+      <div class="modal-header">
+        <h3><i data-lucide="wallet"></i> <span>Thanh toán</span></h3>
+        <button class="close-btn" type="button" data-fx-close="paymentModal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Bước chọn phương thức -->
+        <div id="payForm">
+          <section class="fx-section">
+            <h4>Tóm tắt đơn hàng</h4>
+            <div id="payItems"></div>
+            <div class="fx-line fx-total"><span>Tổng tiền:</span><strong id="payTotal"></strong></div>
+          </section>
+
+          <section class="fx-section">
+            <h4>Thông tin giao hàng</h4>
+            <div class="fx-info-row"><span>Người nhận:</span><strong id="payName"></strong></div>
+            <div class="fx-info-row"><span>Số điện thoại:</span><strong id="payPhone"></strong></div>
+            <div class="fx-info-row"><span>Địa chỉ:</span><strong id="payAddress"></strong></div>
+          </section>
+
+          <section class="fx-section">
+            <h4>Phương thức thanh toán</h4>
+
+            <label class="fx-method selected" data-fx-method="cash">
+              <input type="radio" name="fxPay" value="cash" checked>
+              <i data-lucide="banknote"></i>
+              <div><strong>Tiền mặt</strong><small>Thanh toán khi nhận hàng (COD)</small></div>
+            </label>
+
+            <label class="fx-method" data-fx-method="bank">
+              <input type="radio" name="fxPay" value="bank">
+              <i data-lucide="smartphone"></i>
+              <div><strong>Chuyển khoản ngân hàng</strong><small>Qua ứng dụng mobile banking</small></div>
+            </label>
+
+            <div id="bankPanel" hidden>
+              <p class="fx-sub">Chọn ngân hàng của bạn</p>
+              <div class="fx-banks" id="bankGrid"></div>
+
+              <div class="fx-transfer" id="transferBox" hidden>
+                <h5>Thông tin chuyển khoản (giả lập)</h5>
+                <div class="fx-info-row"><span>Ngân hàng:</span><strong id="tfBank"></strong></div>
+                <div class="fx-info-row"><span>Số tài khoản:</span><strong>0123 456 789</strong></div>
+                <div class="fx-info-row"><span>Chủ tài khoản:</span><strong>LANGNGHE VN DEMO</strong></div>
+                <div class="fx-info-row"><span>Nội dung:</span><strong id="tfNote"></strong></div>
+                <div class="fx-info-row"><span>Số tiền:</span><strong id="tfAmount"></strong></div>
+                <p class="fx-demo-note">Đây là bản demo, không có giao dịch thực.</p>
+              </div>
+            </div>
+
+            <p class="fx-error" id="payError"></p>
+          </section>
+
+          <button type="button" class="btn btn-primary btn-block" id="confirmPay">
+            <i data-lucide="check-circle"></i> Xác nhận đặt hàng
+          </button>
+        </div>
+
+        <!-- Màn hình đặt hàng thành công -->
+        <div class="fx-success" id="paySuccess" hidden>
+          <div class="fx-success-icon"><i data-lucide="check"></i></div>
+          <h3>Đặt hàng thành công!</h3>
+          <p>Cảm ơn bạn đã ủng hộ nghệ nhân Việt Nam. Chúng tôi sẽ liên hệ để xác nhận đơn hàng.</p>
+          <div class="fx-info-row"><span>Mã đơn hàng:</span><strong id="okCode"></strong></div>
+          <div class="fx-info-row"><span>Phương thức:</span><strong id="okMethod"></strong></div>
+          <div class="fx-info-row" id="okBankRow"><span>Ngân hàng:</span><strong id="okBank"></strong></div>
+          <div class="fx-info-row"><span>Tổng tiền:</span><strong id="okTotal"></strong></div>
+          <button type="button" class="btn btn-primary btn-block" data-fx-close="paymentModal" style="margin-top:1.2rem">Đóng</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- FOOTER -->
   <footer class="footer">
     <p>&copy; 2026 Bản Đồ Làng Nghề Truyền Thống Việt Nam. Bảo tồn và phát triển giá trị văn hóa dân tộc.</p>
@@ -257,5 +426,8 @@
   
   <!-- Link JS riêng -->
   <script src="script.js"></script>
+
+  <!-- JS cho tính năng mới (đăng nhập, thanh toán, ngôn ngữ) -->
+  <script src="features.js"></script>
 </body>
 </html>
