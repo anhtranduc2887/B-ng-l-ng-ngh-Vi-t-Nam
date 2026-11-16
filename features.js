@@ -4,7 +4,8 @@
    2) Thanh toán (Tiền mặt / Chuyển khoản ngân hàng giả lập)
    3) Chọn ngôn ngữ Tiếng Việt / English cho toàn bộ web
 
-   File này được nạp SAU script.js và KHÔNG sửa script.js.
+   File này được nạp SAU script.js. Phần dịch EN phủ toàn bộ nội dung của
+   script.js (25 làng nghề, 22 sản phẩm, lịch trình, trình xây dựng lộ trình...).
    Nó chỉ dùng lại các biến/hàm cũ: cart, updateCartCount(), checkout().
    Lưu ý: đây là bản DEMO — dữ liệu lưu ở localStorage, không an toàn
    như backend thật.
@@ -72,6 +73,17 @@
     'Sản Phẩm Chính Gốc': 'Authentic Products',
     'Đặt mua các mặt hàng gốm sứ, lụa tơ tằm, mây tre đan trực tiếp từ nghệ nhân.': 'Order ceramics, silk and woven bamboo & rattan directly from artisans.',
 
+    /* --- sứ mệnh & tầm nhìn, số liệu (MỚI) --- */
+    'Sứ Mệnh & Tầm Nhìn': 'Mission & Vision',
+    'Vì sao LàngNghềVN ra đời': 'Why CraftVillageVN was created',
+    'Sứ mệnh': 'Mission',
+    'Hỗ trợ du khách trong và ngoài nước dễ dàng tìm hiểu, lên lịch trình và mua sắm sản phẩm làng nghề; đồng thời kích thích cung - cầu để các làng nghề, nghệ nhân có thêm thu nhập và tiếp tục giữ nghề.': 'To help domestic and international visitors easily learn about, plan trips to and shop for craft village products, while stimulating supply and demand so that craft villages and artisans earn more income and keep their trades alive.',
+    'Tầm nhìn': 'Vision',
+    'Trở thành nền tảng số hàng đầu về du lịch làng nghề Việt Nam: mỗi làng nghề đều được giới thiệu, mỗi sản phẩm đều có câu chuyện và mỗi du khách đều có thể tự tin lên kế hoạch trải nghiệm.': 'To become the leading digital platform for craft village tourism in Vietnam: every craft village is showcased, every product has a story, and every traveler can plan their experience with confidence.',
+    'Làng nghề': 'Craft villages',
+    'Tỉnh/Thành': 'Provinces/Cities',
+    'Sản phẩm': 'Products',
+
     /* --- bản đồ --- */
     'Bản Đồ Làng Nghề Việt Nam': 'Vietnam Craft Village Map',
     'Chọn khu vực hoặc nhấp vào ghim trên bản đồ để xem chi tiết làng nghề': 'Choose a region or click a pin on the map to see village details',
@@ -114,23 +126,136 @@
     'Ngày 2: Làng Đúc Đồng Phước Kiều': 'Day 2: Phuoc Kieu Bronze Casting Village',
     'Sáng: Thăm làng đúc đồng Phước Kiều, thưởng thức âm thanh cồng chiêng độc đáo.': 'Morning: Visit Phuoc Kieu bronze casting village and enjoy the distinctive sound of gongs.',
 
-    /* --- dữ liệu làng nghề (tên, tỉnh, mô tả) --- */
+    /* --- lịch trình miền Nam (MỚI) --- */
+    'Lịch Trình Trải Nghiệm Làng Nghề Miền Nam (2 Ngày)': 'Southern Vietnam Craft Village Experience (2 Days)',
+    'Ngày 1: TP.HCM - Gốm Lái Thiêu': 'Day 1: Ho Chi Minh City - Lai Thieu Pottery',
+    'Sáng: Từ TP.HCM đi Lái Thiêu, tham quan lò gốm và thử vẽ hoa văn lên sản phẩm.': 'Morning: Travel from Ho Chi Minh City to Lai Thieu, tour the pottery kilns and try painting patterns onto the ware.',
+    'Chiều: Thưởng thức trái cây và ẩm thực vùng Lái Thiêu.': 'Afternoon: Enjoy the fruit and local cuisine of the Lai Thieu area.',
+    'Ngày 2: Cần Thơ - Làng chiếu Cẩm Bàn': 'Day 2: Can Tho - Cam Ban Mat Weaving Village',
+    'Sáng: Di chuyển xuống Cần Thơ, tìm hiểu nghề dệt chiếu thủ công.': 'Morning: Head down to Can Tho and learn about the craft of handwoven mats.',
+    'Chiều: Đi thuyền chợ nổi, mua đặc sản làm quà.': 'Afternoon: Take a boat to the floating market and buy local specialties as gifts.',
+
+    /* --- tự xây dựng lộ trình (MỚI) --- */
+    'Tự xây dựng lộ trình theo nhu cầu': 'Build Your Own Route',
+    'Chọn một tỉnh/thành hoặc tick trực tiếp các làng nghề bạn muốn đến. Hệ thống sẽ sắp xếp lộ trình, tính số km, đề xuất phương tiện và hoạt động.': 'Pick a province/city or tick the craft villages you want to visit. The system will arrange the route, calculate the distance, and suggest transport and activities.',
+    'Tỉnh / Thành phố:': 'Province / City:',
+    'Xuất phát từ:': 'Departing from:',
+    'Làng nghề muốn tham quan:': 'Craft villages to visit:',
+    'Xây dựng lộ trình': 'Build Route',
+    '-- Chọn theo từng làng nghề --': '-- Choose individual craft villages --',
+    'Tự động (thành phố gần nhất)': 'Automatic (nearest city)',
+    'Vui lòng chọn một tỉnh/thành hoặc ít nhất một làng nghề.': 'Please select a province/city or at least one craft village.',
+    'làng nghề': 'village(s)',
+    'ngày': 'day(s)',
+    'km (cả đi và về)': 'km (round trip)',
+    'di chuyển': 'of travel',
+    '* Số km là ước tính đường bộ từ khoảng cách đường chim bay (x1,3); thời gian chưa gồm giờ nghỉ và kẹt xe.': '* Distances are road estimates based on straight-line distance (x1.3); travel times do not include rest stops or traffic.',
+    'Đi bộ hoặc xe đạp': 'Walk or cycle',
+    'Taxi / Grab hoặc thuê xe máy': 'Taxi / Grab or rent a motorbike',
+    'Ô tô riêng, xe limousine hoặc xe khách': 'Private car, limousine van or coach',
+    'Máy bay hoặc tàu hỏa (có thể kết hợp taxi từ ga/sân bay)': 'Plane or train (plus a taxi from the station/airport if needed)',
+
+    /* --- hoạt động đề xuất theo loại nghề (MỚI) --- */
+    'Tự tay nặn gốm trên bàn xoay': 'Shape pottery by hand on the wheel',
+    'Tô vẽ hoa văn lên sản phẩm': 'Paint patterns onto your piece',
+    'Tham quan lò nung truyền thống': 'Visit a traditional kiln',
+    'Xem quy trình ươm tơ, dệt thêu thủ công': 'Watch silk reeling, weaving and hand embroidery',
+    'Thử ngồi khung dệt cùng nghệ nhân': 'Try the loom alongside an artisan',
+    'Chọn mua vải, khăn làm quà': 'Choose fabrics and scarves as gifts',
+    'Xem nghệ nhân khắc ván, in tranh': 'Watch artisans carve blocks and print paintings',
+    'Tự in một bức tranh mang về': 'Print a painting to take home',
+    'Nghe kể ý nghĩa các bức tranh': 'Hear the meanings behind the paintings',
+    'Học đan lát cơ bản': 'Learn basic weaving',
+    'Tham quan xưởng và vùng nguyên liệu': 'Visit the workshop and raw-material area',
+    'Mua sản phẩm trực tiếp tại xưởng': 'Buy products directly at the workshop',
+    'Quan sát đúc, chạm khắc kim loại/đá': 'Observe metal and stone casting and carving',
+    'Thử chạm một mẫu nhỏ': 'Try carving a small piece',
+    'Tham quan xưởng nghệ nhân': "Visit an artisan's workshop",
+    'Xem thợ chạm khắc, sơn mài': 'Watch craftsmen carve and lacquer',
+    'Thử mài, đánh bóng một vật nhỏ': 'Try sanding and polishing a small item',
+    'Tham quan nhà cổ, xưởng nghề': 'Visit old houses and craft workshops',
+    'Học chằm, ép nón lá': 'Learn to stitch and press conical hats',
+    'Chụp ảnh check-in với nón lá': 'Take check-in photos with a conical hat',
+    'Mua nón làm quà': 'Buy a hat as a gift',
+    'Tham quan lò nấu kẹo, bánh': 'Visit a candy and cake-making workshop',
+    'Tự làm và nếm thử đặc sản': 'Make and taste local specialties',
+    'Mua đặc sản làm quà': 'Buy specialties as gifts',
+
+    /* --- dữ liệu làng nghề: tên, tỉnh/thành, mô tả (đủ 25 làng) --- */
     'Làng gốm Bát Tràng': 'Bat Trang Pottery Village',
     'Làng lụa Vạn Phúc': 'Van Phuc Silk Village',
     'Làng đá mỹ nghệ Non Nước': 'Non Nuoc Stone Carving Village',
     'Làng đúc đồng Phước Kiều': 'Phuoc Kieu Bronze Casting Village',
     'Làng chiếu Cẩm Bàn': 'Cam Ban Mat Weaving Village',
+    'Làng gốm Phù Lãng': 'Phu Lang Pottery Village',
+    'Làng tranh Đông Hồ': 'Dong Ho Painting Village',
+    'Làng nón Chuông': 'Chuong Conical Hat Village',
+    'Làng sơn mài Hạ Thái': 'Ha Thai Lacquerware Village',
+    'Làng mây tre đan Phú Vinh': 'Phu Vinh Bamboo & Rattan Weaving Village',
+    'Làng đúc đồng Đại Bái': 'Dai Bai Bronze Casting Village',
+    'Làng chạm bạc Đồng Xâm': 'Dong Xam Silver Engraving Village',
+    'Làng gỗ mỹ nghệ Đồng Kỵ': 'Dong Ky Woodcarving Village',
+    'Làng thêu Quất Động': 'Quat Dong Embroidery Village',
+    'Làng cói Kim Sơn': 'Kim Son Sedge Weaving Village',
+    'Làng đá Ninh Vân': 'Ninh Van Stone Village',
+    'Làng nón bài thơ Tây Hồ': 'Tay Ho Poem Hat Village',
+    'Làng tranh Sình': 'Sinh Painting Village',
+    'Làng gốm Thanh Hà': 'Thanh Ha Pottery Village',
+    'Làng mộc Kim Bồng': 'Kim Bong Carpentry Village',
+    'Làng gốm Bàu Trúc': 'Bau Truc Pottery Village',
+    'Làng gốm Lái Thiêu': 'Lai Thieu Pottery Village',
+    'Làng thổ cẩm Châu Giang': 'Chau Giang Brocade Village',
+    'Làng gốm đỏ Vĩnh Long': 'Vinh Long Red Pottery Village',
+    'Làng kẹo dừa Bến Tre': 'Ben Tre Coconut Candy Village',
+
     'Hà Nội': 'Hanoi',
     'Đà Nẵng': 'Da Nang',
     'Quảng Nam': 'Quang Nam',
     'Cần Thơ': 'Can Tho',
+    'Bắc Ninh': 'Bac Ninh',
+    'Thái Bình': 'Thai Binh',
+    'Ninh Bình': 'Ninh Binh',
+    'Thừa Thiên Huế': 'Thua Thien Hue',
+    'Huế': 'Hue',
+    'Ninh Thuận': 'Ninh Thuan',
+    'TP. Hồ Chí Minh': 'Ho Chi Minh City',
+    'An Giang': 'An Giang',
+    'Vĩnh Long': 'Vinh Long',
+    'Bến Tre': 'Ben Tre',
+
     'Làng gốm sứ truyền thống có lịch sử hơn 500 năm, nổi tiếng với các sản phẩm gốm tinh xảo.': 'A traditional ceramics village with over 500 years of history, famous for exquisite pottery.',
     'Nơi sản xuất lụa tơ tằm thượng hạng, mềm mại nổi tiếng từ thời nhà Nguyễn.': 'A producer of premium silk, famed for its softness since the Nguyen dynasty.',
     'Nằm dưới chân núi Ngũ Hành Sơn, nổi tiếng với các tác phẩm điêu khắc đá độc đáo.': 'Located at the foot of the Marble Mountains, famous for unique stone sculptures.',
     'Nổi tiếng với nghề đúc chiêng, cồng, lư hương bằng đồng truyền thống.': 'Famous for the traditional casting of bronze gongs, cymbals and incense burners.',
     'Làng nghề dệt chiếu thủ công đậm đà bản sắc vùng sông nước Miền Tây.': 'A handwoven-mat village rich in the identity of the Mekong Delta river region.',
+    'Làng gốm lâu đời với men rạn, men nâu đặc trưng, nung bằng lò rơm củi truyền thống.': 'An old pottery village known for its distinctive crackle and brown glazes, fired in traditional straw-and-wood kilns.',
+    'Cái nôi của dòng tranh khắc gỗ dân gian, in trên giấy điệp với màu sắc từ thiên nhiên.': 'The cradle of woodblock folk painting, printed on diep paper with colors drawn from nature.',
+    'Làng làm nón lá nổi tiếng xứ Bắc, nón mỏng, nhẹ và có đường khâu rất đều tay.': 'A famous conical-hat village of the North, producing thin, light hats with remarkably even stitching.',
+    'Làng nghề sơn mài lâu đời với các sản phẩm tranh, hộp, khay sơn ta bóng đẹp, bền màu.': 'A long-established lacquer village making glossy, colorfast paintings, boxes and trays in traditional natural lacquer.',
+    'Làng đan lát nổi tiếng với đèn, giỏ, khay mây tre được xuất khẩu đi nhiều nước.': 'A weaving village famous for bamboo and rattan lamps, baskets and trays exported to many countries.',
+    'Làng nghề gò đồng hơn nghìn năm tuổi, nổi tiếng với lư hương, chuông và đồ thờ.': 'A copper-beating village over a thousand years old, famous for incense burners, bells and ritual objects.',
+    'Làng chạm bạc thủ công tinh xảo, sản phẩm là đồ trang sức, hộp và tượng bạc nhỏ.': 'A village of exquisite handcrafted silver engraving, producing jewelry, boxes and small silver statues.',
+    'Làng nghề mộc nổi tiếng với đồ gỗ chạm khắc, tủ, sập và tượng gỗ cao cấp.': 'A carpentry village famous for carved furniture, cabinets, wooden divans and high-end wooden statues.',
+    'Làng thêu tay nổi tiếng hàng trăm năm với tranh thêu, khăn và áo dài thêu hoa văn.': 'A hand-embroidery village renowned for centuries, making embroidered paintings, scarves and patterned ao dai.',
+    'Vùng đất bãi bồi ven biển với nghề dệt chiếu, giỏ, thảm cói bền đẹp.': 'A coastal alluvial area known for durable, attractive sedge mats, baskets and rugs.',
+    'Làng chế tác đá bên chân núi đá vôi, nổi tiếng với tượng đá, bia và đồ đá mỹ nghệ.': 'A stone-working village at the foot of limestone mountains, famous for stone statues, steles and decorative stonework.',
+    'Nơi làm nón bài thơ xứ Huế với những câu thơ ẩn hiện giữa hai lớp lá khi soi ánh sáng.': 'Home of the Hue "poem hat", with verses that appear between two layers of leaves when held up to the light.',
+    'Làng tranh khắc gỗ dân gian xứ Huế gắn với tín ngưỡng và phong tục cúng lễ.': 'A Hue woodblock folk-painting village tied to local beliefs and offering customs.',
+    'Làng gốm bên sông Thu Bồn gần phố cổ Hội An, nổi tiếng với tượng, đồ trang trí gốm.': 'A pottery village on the Thu Bon River near Hoi An Ancient Town, famous for ceramic figurines and decorations.',
+    'Làng mộc lâu đời gắn với nhà cổ Hội An, nổi tiếng với chạm khắc gỗ tinh xảo.': "A long-established carpentry village linked to Hoi An's old houses, famous for fine woodcarving.",
+    'Làng gốm của người Chăm, làm hoàn toàn bằng tay và nung lộ thiên, được xem là cổ nhất Đông Nam Á.': 'A Cham pottery village where ware is made entirely by hand and fired in the open air, considered the oldest in Southeast Asia.',
+    'Làng gốm Nam Bộ với lối trang trí hoa văn pha trộn phong cách Hoa - Việt.': 'A Southern pottery village with decorative patterns blending Chinese and Vietnamese styles.',
+    'Làng dệt thổ cẩm của cộng đồng người Chăm miền Tây với hoa văn đặc sắc.': 'A brocade-weaving village of the Cham community in the Mekong Delta, with distinctive patterns.',
+    'Cụm lò gốm đỏ ven sông Cổ Chiên, nổi tiếng với chum, vại, chậu bằng đất phù sa.': 'A cluster of red-pottery kilns along the Co Chien River, famous for jars, urns and pots made from alluvial clay.',
+    'Xứ dừa nổi tiếng với nghề nấu kẹo dừa thủ công, vị béo ngọt thơm đặc trưng.': 'The "land of coconuts", famous for handmade coconut candy with its distinctive rich, sweet aroma.',
 
-    /* --- mua sắm --- */
+    /* --- bản đồ: popup (MỚI) --- */
+    'Đang tải ảnh...': 'Loading image...',
+    'Chưa có ảnh': 'No image available',
+    'Ảnh: Wikipedia': 'Photo: Wikipedia',
+    '+ Lịch trình': '+ Itinerary',
+
+    /* --- mua sắm: danh mục, tên sản phẩm, làng, câu chuyện (đủ 22 sản phẩm) --- */
     'Gian Hàng Sản Phẩm Làng Nghề': 'Craft Village Products',
     'Ủng hộ nghệ nhân Việt Nam qua các sản phẩm thủ công tinh xảo': 'Support Vietnamese artisans through exquisite handmade products',
     'Tất cả': 'All',
@@ -138,15 +263,81 @@
     'Lụa tơ tằm': 'Silk',
     'Mây tre đan': 'Bamboo & Rattan',
     'Tranh dân gian': 'Folk Paintings',
+    'Đồng - Bạc - Đá': 'Bronze - Silver - Stone',
+    'Gỗ - Sơn mài': 'Wood - Lacquerware',
+    'Nón & Đặc sản': 'Hats & Specialties',
     'Thêm': 'Add',
+    'Nhấn để xem câu chuyện': 'Click to read the story',
+    'Thêm vào giỏ': 'Add to cart',
+
     'Bộ Ấm Trà Gốm Bát Tràng Men Cổ': 'Bat Trang Antique-Glaze Ceramic Tea Set',
     'Khăn Thêu Lụa Vạn Phúc Họa Tiết Sen': 'Van Phuc Embroidered Silk Scarf with Lotus Motif',
     'Đèn Mây Tre Đan Thủ Công': 'Handwoven Bamboo & Rattan Lamp',
     'Tranh Dân Gian Đông Hồ Khung Gỗ': 'Dong Ho Folk Painting with Wooden Frame',
+    'Bình Gốm Men Rạn Phù Lãng': 'Phu Lang Crackle-Glaze Ceramic Vase',
+    'Nón Lá Làng Chuông': 'Chuong Village Conical Hat',
+    'Hộp Sơn Mài Hạ Thái': 'Ha Thai Lacquer Box',
+    'Lư Hương Đồng Đại Bái': 'Dai Bai Bronze Incense Burner',
+    'Hộp Trang Sức Bạc Chạm Đồng Xâm': 'Dong Xam Engraved Silver Jewelry Box',
+    'Hộp Gỗ Chạm Khắc Đồng Kỵ': 'Dong Ky Carved Wooden Box',
+    'Khăn Thêu Tay Quất Động': 'Quat Dong Hand-Embroidered Scarf',
+    'Giỏ Cói Kim Sơn': 'Kim Son Sedge Basket',
+    'Tượng Đá Ninh Vân': 'Ninh Van Stone Statue',
+    'Nón Bài Thơ Huế': 'Hue Poem Hat',
+    'Tranh Dân Gian Làng Sình': 'Sinh Village Folk Painting',
+    'Gốm Trang Trí Thanh Hà': 'Thanh Ha Decorative Pottery',
+    'Tượng Gỗ Mộc Kim Bồng': 'Kim Bong Carved Wooden Statue',
+    'Bình Gốm Chăm Bàu Trúc': 'Bau Truc Cham Ceramic Vase',
+    'Gốm Lái Thiêu Hoa Văn Hoa - Việt': 'Lai Thieu Pottery with Chinese-Vietnamese Patterns',
+    'Khăn Thổ Cẩm Châu Giang': 'Chau Giang Brocade Scarf',
+    'Chậu Gốm Đỏ Vĩnh Long': 'Vinh Long Red Clay Pot',
+    'Kẹo Dừa Bến Tre Hộp Quà': 'Ben Tre Coconut Candy Gift Box',
+
     'Gốm Bát Tràng': 'Bat Trang Pottery',
     'Lụa Vạn Phúc': 'Van Phuc Silk',
-    'Mây Tre Phu Vinh': 'Phu Vinh Bamboo & Rattan',
+    'Mây Tre Phú Vinh': 'Phu Vinh Bamboo & Rattan',
     'Tranh Đông Hồ': 'Dong Ho Paintings',
+    'Gốm Phù Lãng': 'Phu Lang Pottery',
+    'Nón Chuông': 'Chuong Hats',
+    'Sơn mài Hạ Thái': 'Ha Thai Lacquerware',
+    'Đúc đồng Đại Bái': 'Dai Bai Bronze Casting',
+    'Chạm bạc Đồng Xâm': 'Dong Xam Silver Engraving',
+    'Gỗ Đồng Kỵ': 'Dong Ky Woodwork',
+    'Thêu Quất Động': 'Quat Dong Embroidery',
+    'Cói Kim Sơn': 'Kim Son Sedge',
+    'Đá Ninh Vân': 'Ninh Van Stone',
+    'Nón Tây Hồ': 'Tay Ho Hats',
+    'Tranh Sình': 'Sinh Paintings',
+    'Gốm Thanh Hà': 'Thanh Ha Pottery',
+    'Mộc Kim Bồng': 'Kim Bong Carpentry',
+    'Gốm Bàu Trúc': 'Bau Truc Pottery',
+    'Gốm Lái Thiêu': 'Lai Thieu Pottery',
+    'Thổ cẩm Châu Giang': 'Chau Giang Brocade',
+    'Gốm đỏ Vĩnh Long': 'Vinh Long Red Pottery',
+    'Kẹo dừa Bến Tre': 'Ben Tre Coconut Candy',
+
+    'Men cổ Bát Tràng được pha từ tro trấu và đất sét trắng; mỗi bộ ấm là kết tinh của nhiều thế hệ thợ gốm giữ lửa nghề.': 'Bat Trang antique glaze is blended from rice-husk ash and white clay; each tea set is the crystallization of many generations of potters keeping the kiln fire alive.',
+    'Hoa sen tượng trưng cho sự thanh cao; mỗi chiếc khăn lụa mang vẻ mềm mại của tơ tằm Vạn Phúc và nét dịu dàng của làng quê Bắc Bộ.': 'The lotus symbolizes purity; each silk scarf carries the softness of Van Phuc silk and the gentle charm of the northern Vietnamese countryside.',
+    'Mây tre được ngâm, phơi khô nhiều ngày rồi đan tay từng nan; ánh sáng xuyên qua tạo nên những bóng hoa văn lung linh.': 'Bamboo and rattan are soaked and dried for several days, then woven by hand strip by strip; light passing through casts shimmering patterned shadows.',
+    'Tranh Đông Hồ in từ ván khắc gỗ, màu lấy từ lá, than, hoa hòe và vỏ sò, gửi gắm ước mong may mắn dịp Tết.': 'Dong Ho paintings are printed from carved woodblocks with colors made from leaves, charcoal, pagoda-tree flowers and seashells, carrying wishes for good luck at Tet.',
+    'Vết rạn trên men từng bị xem là lỗi lò nung, nhưng thợ Phù Lãng biến nó thành vẻ đẹp riêng: mỗi chiếc bình có một đường rạn không lặp lại.': 'Cracks in the glaze were once seen as kiln flaws, but Phu Lang potters turned them into a signature beauty: every vase has a crackle pattern that never repeats.',
+    'Từng chiếc lá được ủi phẳng, chằm kín tay; chiếc nón nhẹ như không là thành quả của nhiều công đoạn tỉ mỉ.': 'Each leaf is pressed flat and stitched by hand; a hat that feels almost weightless is the result of many meticulous steps.',
+    'Một lớp sơn phải qua nhiều lần phơi, mài và đánh bóng; người thợ kiên nhẫn chờ đợi để màu sơn sâu và bền theo năm tháng.': 'Each lacquer layer goes through repeated drying, sanding and polishing; the artisan waits patiently so the color grows deep and lasting over the years.',
+    'Đồng nóng chảy được rót vào khuôn một lần duy nhất; hỏng là làm lại từ đầu, nên mỗi chiếc lư mang sự cẩn trọng của người thợ.': 'Molten bronze is poured into the mold only once; a failure means starting over, so every burner carries the care of its maker.',
+    'Nghệ nhân chạm từng nét nhỏ như sợi tóc trên bạc; nghề được truyền từ đời này sang đời khác trong các gia đình trong làng.': "Artisans engrave lines as fine as a hair onto silver; the craft is passed from generation to generation within the village's families.",
+    'Mỗi nét chạm trên gỗ là sự kiên nhẫn của người thợ ngồi hàng giờ bên khối gỗ, làm nên vẻ đẹp tinh xảo của đồ mộc Đồng Kỵ.': 'Every carved line reflects the patience of a craftsman sitting for hours over a block of wood, creating the refined beauty of Dong Ky woodwork.',
+    'Đường kim mũi chỉ mịn đến mức tranh thêu trông như tranh vẽ; nhiều thế hệ phụ nữ trong làng gìn giữ nghề thêu như báu vật.': 'The stitches are so fine that embroidered pictures look painted; generations of village women have treasured the craft of embroidery.',
+    'Cói mọc trên đất bãi bồi ven biển, dai và mịn; người dân dệt cói thành những chiếc giỏ mộc mạc, gần gũi.': 'Sedge grows on coastal alluvial land, tough and smooth; villagers weave it into simple, homely baskets.',
+    'Gần núi đá vôi, người làng Ninh Vân nối nghề tạc đá qua nhiều đời, biến những khối đá thô thành tượng và đồ mỹ nghệ.': 'Living near limestone mountains, the people of Ninh Van have carried on stone carving for generations, turning rough blocks into statues and decorative art.',
+    'Nón bài thơ có hình ảnh và câu thơ lồng giữa hai lớp lá, chỉ hiện rõ khi soi lên ánh sáng, đậm chất thơ xứ Huế.': 'The poem hat has images and verses set between two layers of leaves, visible only when held up to the light, full of the poetry of Hue.',
+    'Tranh Sình in ván khắc, màu sắc rực rỡ, gắn với phong tục cúng lễ của người dân xứ Huế.': 'Sinh paintings are printed from carved blocks in vivid colors, tied to the offering customs of the people of Hue.',
+    'Đất sét sông Thu Bồn và lò nung truyền thống làm nên những món gốm mang hơi thở phố cổ Hội An.': 'Clay from the Thu Bon River and traditional kilns create pottery that carries the spirit of Hoi An Ancient Town.',
+    'Thợ mộc Kim Bồng gắn với việc chạm khắc, xây dựng nhà cổ Hội An; tay nghề được truyền qua nhiều thế hệ.': "Kim Bong carpenters are tied to carving and building Hoi An's old houses; their skills have been passed down through many generations.",
+    'Người phụ nữ Chăm nặn gốm hoàn toàn bằng tay, vừa xoay vừa tạo hình, rồi nung lộ thiên bằng rơm và củi.': 'Cham women shape pottery entirely by hand, turning and molding as they go, then fire it in the open with straw and firewood.',
+    'Gốm Lái Thiêu mang dấu ấn giao thoa của nhiều cộng đồng ở Nam Bộ, thể hiện qua kiểu dáng và hoa văn.': 'Lai Thieu pottery bears the mark of many communities in the South, reflected in its shapes and patterns.',
+    'Thổ cẩm Châu Giang do cộng đồng người Chăm dệt thủ công, hoa văn gắn với đời sống sông nước miền Tây.': 'Chau Giang brocade is handwoven by the Cham community, with patterns tied to the river life of the Mekong Delta.',
+    'Đất phù sa ven sông được nung thành sắc đỏ nâu ấm áp, đặc trưng của gốm đỏ Vĩnh Long.': 'Riverside alluvial clay is fired to a warm reddish-brown, the hallmark of Vinh Long red pottery.',
+    'Nước cốt dừa được nấu liu riu với mạch nha, đổ khuôn và cắt thủ công, mang vị ngọt béo của xứ dừa.': 'Coconut cream is slowly simmered with malt syrup, poured into molds and cut by hand, delivering the rich sweetness of the land of coconuts.',
 
     /* --- liên hệ --- */
     'Liên Hệ & Hợp Tác': 'Contact & Collaboration',
@@ -155,6 +346,7 @@
     'H1-405, Đại học Bách Khoa, ĐHQGHCM, Đông Hòa, TPHCM': 'H1-405, Ho Chi Minh City University of Technology, VNU-HCM, Dong Hoa, Ho Chi Minh City',
     'Giờ làm việc: 13:00 - 15:00 (Thứ 2)': 'Working hours: 1:00 PM - 3:00 PM (Monday)',
     'Họ và tên *': 'Full name *',
+    'John Doe / Nguyễn Văn A': 'John Doe / Nguyen Van A',
     'Nội dung *': 'Message *',
     'Nhập câu hỏi hoặc yêu cầu hỗ trợ du lịch...': 'Enter your question or travel support request...',
     'Gửi tin nhắn': 'Send message',
@@ -223,10 +415,35 @@
     'Tin nhắn của bạn đã được gửi thành công. Cảm ơn bạn đã liên hệ!': 'Your message was sent successfully. Thank you for contacting us!'
   };
 
-  /* Quy tắc dịch cho chuỗi có số: "450.000 đ" / "0 VNĐ" -> "450,000 VND" */
+  /* Quy tắc dịch cho chuỗi có số / ghép động (script.js tạo ra lúc chạy):
+       "450.000 đ" / "0 VNĐ"            -> "450,000 VND"
+       "Ngày 2"                          -> "Day 2"
+       "(Hà Nội)"                        -> "(Hanoi)"
+       "Lộ trình đề xuất từ Hà Nội"      -> "Suggested route from Hanoi"
+       "Hà Nội → Làng gốm Bát Tràng:"    -> "Hanoi → Bat Trang Pottery Village:"
+       "~12 km · Taxi ... · ~25 phút"    -> "~12 km · Taxi ... · ~25 min"
+       "~2,5 giờ"                        -> "~2.5 hours"                       */
+  function timeEn(s, prefix) {
+    const m = s.match(/^([\d,]+) (giờ|phút)$/);
+    if (!m) return undefined;
+    return prefix + (m[2] === 'giờ' ? m[1].replace(',', '.') + ' hours' : m[1] + ' min');
+  }
+
   function applyRules(t) {
-    const m = t.match(/^([\d.,]+)\s*(?:đ|VNĐ)$/);
-    if (m) return m[1].replace(/\./g, ',') + ' VND';
+    let m;
+    if ((m = t.match(/^([\d.,]+)\s*(?:đ|VNĐ)$/))) return m[1].replace(/\./g, ',') + ' VND';
+    if ((m = t.match(/^Ngày (\d+)$/))) return 'Day ' + m[1];
+    if ((m = t.match(/^\((.+)\)$/))) {
+      const inner = translateString(m[1]);
+      return inner !== m[1] ? '(' + inner + ')' : undefined;
+    }
+    if ((m = t.match(/^Lộ trình đề xuất từ (.+)$/))) return 'Suggested route from ' + translateString(m[1]);
+    if ((m = t.match(/^(.+) → (.+):$/))) return translateString(m[1]) + ' → ' + translateString(m[2]) + ':';
+    if ((m = t.match(/^~(\d+) km · (.+) · ~(.+)$/))) {
+      const tm = timeEn(m[3], '~');
+      return '~' + m[1] + ' km · ' + translateString(m[2]) + ' · ' + (tm !== undefined ? tm : '~' + m[3]);
+    }
+    if ((m = t.match(/^(~?)([\d,]+ (?:giờ|phút))$/))) return timeEn(m[2], m[1]);
     return undefined;
   }
 

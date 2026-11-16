@@ -105,6 +105,29 @@
           <p>Đặt mua các mặt hàng gốm sứ, lụa tơ tằm, mây tre đan trực tiếp từ nghệ nhân.</p>
         </div>
       </div>
+      <div class="mission-block">
+        <div class="section-header">
+          <h2>Sứ Mệnh & Tầm Nhìn</h2>
+          <p>Vì sao LàngNghềVN ra đời</p>
+        </div>
+        <div class="mission-grid">
+          <div class="mission-card">
+            <div class="feature-icon"><i data-lucide="target"></i></div>
+            <h3>Sứ mệnh</h3>
+            <p>Hỗ trợ du khách trong và ngoài nước dễ dàng tìm hiểu, lên lịch trình và mua sắm sản phẩm làng nghề; đồng thời kích thích cung - cầu để các làng nghề, nghệ nhân có thêm thu nhập và tiếp tục giữ nghề.</p>
+          </div>
+          <div class="mission-card">
+            <div class="feature-icon"><i data-lucide="eye"></i></div>
+            <h3>Tầm nhìn</h3>
+            <p>Trở thành nền tảng số hàng đầu về du lịch làng nghề Việt Nam: mỗi làng nghề đều được giới thiệu, mỗi sản phẩm đều có câu chuyện và mỗi du khách đều có thể tự tin lên kế hoạch trải nghiệm.</p>
+          </div>
+        </div>
+        <div class="stats-row">
+          <div><strong id="statVillages">0</strong><span>Làng nghề</span></div>
+          <div><strong id="statProvinces">0</strong><span>Tỉnh/Thành</span></div>
+          <div><strong id="statProducts">0</strong><span>Sản phẩm</span></div>
+        </div>
+      </div>
     </section>
 
     <!-- 2. TRANG BẢN ĐỒ TƯƠNG TÁC (MAP) -->
@@ -180,6 +203,28 @@
           <!-- Hiển thị lịch trình chi tiết -->
         </div>
       </div>
+      <div class="builder-card" id="routeBuilder">
+        <h3><i data-lucide="route"></i> Tự xây dựng lộ trình theo nhu cầu</h3>
+        <p class="builder-note">Chọn một tỉnh/thành hoặc tick trực tiếp các làng nghề bạn muốn đến. Hệ thống sẽ sắp xếp lộ trình, tính số km, đề xuất phương tiện và hoạt động.</p>
+        <form onsubmit="buildRoute(event)">
+          <div class="builder-row">
+            <div class="form-group">
+              <label>Tỉnh / Thành phố:</label>
+              <select id="builderProvince" onchange="onProvinceChange()"></select>
+            </div>
+            <div class="form-group">
+              <label>Xuất phát từ:</label>
+              <select id="builderStart"></select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Làng nghề muốn tham quan:</label>
+            <div class="builder-villages" id="builderVillages"></div>
+          </div>
+          <button type="submit" class="btn btn-primary"><i data-lucide="sparkles"></i> Xây dựng lộ trình</button>
+        </form>
+        <div class="route-result" id="routeResult"></div>
+      </div>
     </section>
 
     <!-- 4. TRANG MUA SẮM (SHOP) -->
@@ -196,6 +241,9 @@
           <button class="tag" onclick="filterProducts('lua', this)">Lụa tơ tằm</button>
           <button class="tag" onclick="filterProducts('may', this)">Mây tre đan</button>
           <button class="tag" onclick="filterProducts('tranh', this)">Tranh dân gian</button>
+          <button class="tag" onclick="filterProducts('kim', this)">Đồng - Bạc - Đá</button>
+          <button class="tag" onclick="filterProducts('go', this)">Gỗ - Sơn mài</button>
+          <button class="tag" onclick="filterProducts('khac', this)">Nón & Đặc sản</button>
         </div>
       </div>
 
@@ -412,6 +460,23 @@
           <div class="fx-info-row"><span>Tổng tiền:</span><strong id="okTotal"></strong></div>
           <button type="button" class="btn btn-primary btn-block" data-fx-close="paymentModal" style="margin-top:1.2rem">Đóng</button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL CÂU CHUYỆN SẢN PHẨM -->
+  <div class="modal" id="storyModal">
+    <div class="modal-content story-content">
+      <div class="modal-header">
+        <h3 id="storyTitle"></h3>
+        <button class="close-btn" onclick="closeStory()">&times;</button>
+      </div>
+      <img id="storyImg" class="story-img" alt="">
+      <p class="story-village" id="storyVillage"></p>
+      <p class="story-text" id="storyText"></p>
+      <div class="modal-footer">
+        <strong id="storyPrice" class="product-price"></strong>
+        <button class="btn btn-primary" id="storyAddBtn"><i data-lucide="plus"></i> Thêm vào giỏ</button>
       </div>
     </div>
   </div>
