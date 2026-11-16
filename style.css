@@ -240,6 +240,7 @@ body {
 .map-layout {
   display: grid;
   grid-template-columns: 320px 1fr;
+  grid-template-rows: 100%;
   gap: 1.5rem;
   height: 600px;
 }
@@ -519,6 +520,10 @@ body {
   }
   .map-layout {
     height: auto;
+    grid-template-rows: auto;
+  }
+  .map-sidebar {
+    max-height: 350px;
   }
   .map-container-wrapper {
     height: 350px;
