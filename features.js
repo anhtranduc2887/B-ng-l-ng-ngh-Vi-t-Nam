@@ -75,7 +75,7 @@
 
     /* --- sứ mệnh & tầm nhìn, số liệu (MỚI) --- */
     'Sứ Mệnh & Tầm Nhìn': 'Mission & Vision',
-    'Vì sao LàngNghềVN ra đời': 'Why CraftVillageVN was created',
+    'Vì sao LàngNghềViệt ra đời': 'Why CraftVillageVN was created',
     'Sứ mệnh': 'Mission',
     'Hỗ trợ du khách trong và ngoài nước dễ dàng tìm hiểu, lên lịch trình và mua sắm sản phẩm làng nghề; đồng thời kích thích cung - cầu để các làng nghề, nghệ nhân có thêm thu nhập và tiếp tục giữ nghề.': 'To help domestic and international visitors easily learn about, plan trips to and shop for craft village products, while stimulating supply and demand so that craft villages and artisans earn more income and keep their trades alive.',
     'Tầm nhìn': 'Vision',
